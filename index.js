@@ -20,7 +20,7 @@ module.exports = Carousel;
 
 function Carousel(el) {
   if (!(this instanceof Carousel)) return new Carousel(el);
-  if (!el) throw new TypeError('swipe() requires an element');
+  if (!el) throw new TypeError('Carousel() requires an element');
   this.el = el;
   this.child = el.children[0];
   this.total = this.child.children.length;
