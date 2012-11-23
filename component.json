@@ -1,0 +1,15 @@
+{
+  "name": "carousel",
+  "repo": "component/carousel",
+  "description": "Carousel component with touch / swipe support",
+  "version": "0.0.1",
+  "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
+  "dependencies": {
+    "component/event": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}

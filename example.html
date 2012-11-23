@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="build/build.css">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <style>
+      body {
+        padding: 5px;
+        font: 14px "Helvetica Neue", Helvetica, Arial;
+      }
+      #container {
+        width: 295px;
+        height: 380px;
+        overflow: hidden;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        height: 380px;
+      }
+      ul li {
+        display: table-cell;
+        vertical-align: top;
+        background: #f8f8f8;
+        background-size: cover;
+        background-position: 50% 0;
+        color: #434343;
+        width: 300px;
+        height: 380px;
+        line-height: 200px;
+        text-align: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        color: white;
+        -webkit-user-select: none;
+      }
+      button {
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        background: #eee;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <ul>
+        <li style="background-image: url(http://www.digitaljournal.com/img/5/9/2/8/1/2/i/1/2/6/o/tard-Cat.jpg)"></li>
+        <li style="background-image: url(http://cdn.inquisitr.com/wp-content/2012/09/Grumpy-Cat-Tadar-Sauce.jpg)"></li>
+        <li style="background-image: url(http://newmediarockstars.com/wp-content/uploads/2012/10/GrumpyCat008.jpeg)"></li>
+        <li style="background-image: url(http://ksaz.images.worldnow.com/images/19768980_BG1.jpg)"></li>
+      </ul>
+    </div>
+
+    <button onclick="s.prev()">prev</button>
+    <button onclick="s.next()">next</button>
+    <button onclick="s.play()">play</button>
+    <button onclick="s.stop()">stop</button>
+
+    <script src="build/build.js"></script>
+    <script>
+      var Carousel = require('carousel');
+      var el = document.querySelector('#container');
+      var cats = Carousel(el);
+      cats.interval(800);
+    </script>
+  </body>
+</html>
