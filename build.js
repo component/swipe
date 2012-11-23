@@ -326,7 +326,9 @@ Carousel.prototype.ontouchmove = function(e){
   var w = this.childWidth;
   var i = this.current;
   this.dx = x - s.x;
-  if (this.isFirst() || this.isLast()) this.dx /= 2;
+  var dir = this.dx < 0 ? 1 : 0;
+  if (this.isFirst() && 0 == dir) this.dx /= 2;
+  if (this.isLast() && 1 == dir) this.dx /= 2;
   this.translate((i * w) + -this.dx);
 };
 
@@ -413,6 +415,7 @@ Carousel.prototype.interval = function(ms){
  */
 
 Carousel.prototype.play = function(){
+  if (this.timer) return;
   this.timer = setInterval(this.cycle.bind(this), this._interval);
   return this;
 };
