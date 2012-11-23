@@ -2,7 +2,7 @@
   "name": "carousel",
   "repo": "component/carousel",
   "description": "Carousel component with touch / swipe support",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
   "dependencies": {
     "component/event": "*"
