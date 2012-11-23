@@ -188,6 +188,7 @@ Carousel.prototype.interval = function(ms){
  */
 
 Carousel.prototype.play = function(){
+  if (this.timer) return;
   this.timer = setInterval(this.cycle.bind(this), this._interval);
   return this;
 };
