@@ -1,7 +1,7 @@
 
 # swipe
 
-  Carousel component with touch / swipe support.
+  Carousel component with touch / swipe support. Try it out the [demo](http://component.github.com/carousel/) in your browser or on your device.
 
 ## Installation
 
