@@ -1,7 +1,7 @@
 
 # Swipe
 
-  Swipe component with touch support, for image carousels or any other content. Try it out the [demo](http://component.github.com/carousel/) in your browser or on your device.
+  Swipe component with touch support, for image carousels or any other content. Try it out the [demo](http://component.github.com/swipe/) in your browser or on your device.
 
 ## Installation
 
