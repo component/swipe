@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="build/build.css">
+    <link rel="stylesheet" href="../build/build.css">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
     <style>
+      * {
+        -webkit-box-sizing: border-box;
+      }
       body {
         padding: 5px;
         font: 14px "Helvetica Neue", Helvetica, Arial;
@@ -20,20 +23,16 @@
       }
       ul li {
         display: table-cell;
-        vertical-align: top;
         background: #f8f8f8;
-        background-size: cover;
-        background-position: 50% 0;
-        color: #434343;
+        color: #888;
         width: 300px;
         height: 380px;
-        line-height: 200px;
-        text-align: center;
         list-style: none;
         margin: 0;
-        padding: 0;
-        color: white;
+        padding: 50px;
         -webkit-user-select: none;
+        border: 1px solid #ddd;
+        border-radius: 2px;
       }
       button {
         margin: 5px 0;
@@ -51,19 +50,29 @@
   <body>
     <div id="container">
       <ul>
-        <li style="background-image: url(http://www.digitaljournal.com/img/5/9/2/8/1/2/i/1/2/6/o/tard-Cat.jpg)"></li>
-        <li style="background-image: url(http://cdn.inquisitr.com/wp-content/2012/09/Grumpy-Cat-Tadar-Sauce.jpg)"></li>
-        <li style="background-image: url(http://newmediarockstars.com/wp-content/uploads/2012/10/GrumpyCat008.jpeg)"></li>
-        <li style="background-image: url(http://ksaz.images.worldnow.com/images/19768980_BG1.jpg)"></li>
+        <li>
+          <h1>One</h1>
+          <p>This is the first example page.</p>
+        </li>
+
+        <li>
+          <h1>Two</h1>
+          <p>This is the second example page.</p>
+        </li>
+
+        <li>
+          <h1>Three</h1>
+          <p>This is the third example page.</p>
+        </li>
+
+        <li>
+          <h1>Four</h1>
+          <p>This is the fourth example page.</p>
+        </li>
       </ul>
     </div>
 
-    <button onclick="cats.prev()">prev</button>
-    <button onclick="cats.next()">next</button>
-    <button onclick="cats.play()">play</button>
-    <button onclick="cats.stop()">stop</button>
-
-    <script src="build/build.js"></script>
+    <script src="../build/build.js"></script>
     <script>
       var swipe = require('swipe');
       var el = document.querySelector('#container');
