@@ -143,9 +143,6 @@ Carousel.prototype.ontouchend = function(e){
   // last -> last
   if (this.isLast() && 1 == dir) return this.next();
 
-  // last -> prev
-  if (this.isLast()) return this.prev();
-
   // N -> N + 1
   if (1 == dir && half) return this.next();
 
