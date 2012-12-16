@@ -1,17 +1,17 @@
 
-# swipe
+# Swipe
 
-  Carousel component with touch / swipe support. Try it out the [demo](http://component.github.com/carousel/) in your browser or on your device.
+  Swipe component with touch support, for image carousels or any other content. Try it out the [demo](http://component.github.com/carousel/) in your browser or on your device.
 
 ## Installation
 
-    $ component install component/carousel
+    $ component install component/swipe
 
 ## API
 
-### Carousel(el)
+### Swipe(el)
 
-  Create a carousel for `el`. This should be a container element
+  Create a swipe object for `el`. This should be a container element
   that wraps a list of several items. View ./example.html for a
   working example.
 

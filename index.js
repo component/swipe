@@ -6,21 +6,21 @@
 var event = require('event');
 
 /**
- * Expose `Carousel`.
+ * Expose `Swipe`.
  */
 
-module.exports = Carousel;
+module.exports = Swipe;
 
 /**
- * Turn `el` into a carousel.
+ * Turn `el` into a swipeable list.
  *
  * @param {Element} el
  * @api public
  */
 
-function Carousel(el) {
-  if (!(this instanceof Carousel)) return new Carousel(el);
-  if (!el) throw new TypeError('Carousel() requires an element');
+function Swipe(el) {
+  if (!(this instanceof Swipe)) return new Swipe(el);
+  if (!el) throw new TypeError('Swipe() requires an element');
   this.el = el;
   this.child = el.children[0];
   this.total = this.child.children.length;
@@ -32,7 +32,6 @@ function Carousel(el) {
   this.duration(300);
   this.show(0, 0);
   this.bind();
-  // TODO: Swipeable() mixin
 }
 
 /**
@@ -41,7 +40,7 @@ function Carousel(el) {
  * @api public
  */
 
-Carousel.prototype.bind = function(){
+Swipe.prototype.bind = function(){
   // TODO: create a bulk event management component.. this is nasty
   event.bind(this.child, 'mousedown', this.ontouchstart.bind(this));
   event.bind(this.child, 'mousemove', this.ontouchmove.bind(this));
@@ -57,7 +56,7 @@ Carousel.prototype.bind = function(){
  * @api public
  */
 
-Carousel.prototype.unbind = function(){
+Swipe.prototype.unbind = function(){
   // TODO: me
 };
 
@@ -67,7 +66,7 @@ Carousel.prototype.unbind = function(){
  * @api private
  */
 
-Carousel.prototype.ontouchstart = function(e){
+Swipe.prototype.ontouchstart = function(e){
   e.stopPropagation();
   if (e.touches) e = e.touches[0];
 
@@ -90,7 +89,7 @@ Carousel.prototype.ontouchstart = function(e){
  * @api private
  */
 
-Carousel.prototype.ontouchmove = function(e){
+Swipe.prototype.ontouchmove = function(e){
   if (!this.down) return;
   if (e.touches && e.touches.length > 1) return;
   e.stopPropagation();
@@ -113,7 +112,7 @@ Carousel.prototype.ontouchmove = function(e){
  * @api private
  */
 
-Carousel.prototype.ontouchend = function(e){
+Swipe.prototype.ontouchend = function(e){
   if (!this.down) return;
   e.stopPropagation();
 
@@ -157,11 +156,11 @@ Carousel.prototype.ontouchend = function(e){
  * Set transition duration to `ms`.
  *
  * @param {Number} ms
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.duration = function(ms){
+Swipe.prototype.duration = function(ms){
   this._duration = ms;
   return this;
 };
@@ -170,11 +169,11 @@ Carousel.prototype.duration = function(ms){
  * Set cycle interval to `ms`.
  *
  * @param {Number} ms
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.interval = function(ms){
+Swipe.prototype.interval = function(ms){
   this._interval = ms;
   return this;
 };
@@ -182,11 +181,11 @@ Carousel.prototype.interval = function(ms){
 /**
  * Play through all the elements.
  *
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.play = function(){
+Swipe.prototype.play = function(){
   if (this.timer) return;
   this.timer = setInterval(this.cycle.bind(this), this._interval);
   return this;
@@ -195,11 +194,11 @@ Carousel.prototype.play = function(){
 /**
  * Stop playing.
  *
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.stop = function(){
+Swipe.prototype.stop = function(){
   clearInterval(this.timer);
   return this;
 };
@@ -211,7 +210,7 @@ Carousel.prototype.stop = function(){
  * @api public
  */
 
-Carousel.prototype.cycle = function(){
+Swipe.prototype.cycle = function(){
   if (this.isLast()) {
     this.current = -1;
     this.next();
@@ -227,7 +226,7 @@ Carousel.prototype.cycle = function(){
  * @api public
  */
 
-Carousel.prototype.isFirst = function(){
+Swipe.prototype.isFirst = function(){
   return this.current == 0;
 };
 
@@ -238,18 +237,18 @@ Carousel.prototype.isFirst = function(){
  * @api public
  */
 
-Carousel.prototype.isLast = function(){
+Swipe.prototype.isLast = function(){
   return this.current == this.total - 1;
 };
 
 /**
  * Show the previous slide, if any.
  *
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.prev = function(){
+Swipe.prototype.prev = function(){
   this.show(this.current - 1);
   return this;
 };
@@ -257,11 +256,11 @@ Carousel.prototype.prev = function(){
 /**
  * Show the next slide, if any.
  *
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.next = function(){
+Swipe.prototype.next = function(){
   this.show(this.current + 1);
   return this;
 };
@@ -270,11 +269,11 @@ Carousel.prototype.next = function(){
  * Show slide `i`.
  *
  * @param {Number} i
- * @return {Carousel} self
+ * @return {Swipe} self
  * @api public
  */
 
-Carousel.prototype.show = function(i, ms){
+Swipe.prototype.show = function(i, ms){
   if (null == ms) ms = this._duration;
   i = Math.max(0, Math.min(i, this.total - 1));
   var x = this.childWidth * i;
@@ -290,7 +289,7 @@ Carousel.prototype.show = function(i, ms){
  * @api private
  */
 
-Carousel.prototype.transitionDuration = function(ms){
+Swipe.prototype.transitionDuration = function(ms){
   var s = this.child.style;
   s.webkitTransitionDuration =
   s.MozTransitionDuration =
@@ -305,7 +304,7 @@ Carousel.prototype.transitionDuration = function(ms){
  * @api private
  */
 
-Carousel.prototype.translate = function(x){
+Swipe.prototype.translate = function(x){
   var s = this.child.style;
   x = -x;
   s.webkitTransform = s.MozTransform = 'translate3d(' + x + 'px, 0, 0)';
