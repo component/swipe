@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var event = require('event');
+var events = require('events');
 
 /**
  * Expose `Swipe`.
@@ -41,13 +41,15 @@ function Swipe(el) {
  */
 
 Swipe.prototype.bind = function(){
-  // TODO: create a bulk event management component.. this is nasty
-  event.bind(this.child, 'mousedown', this.ontouchstart.bind(this));
-  event.bind(this.child, 'mousemove', this.ontouchmove.bind(this));
-  event.bind(document, 'mouseup', this.ontouchend.bind(this));
-  event.bind(this.child, 'touchstart', this.ontouchstart.bind(this));
-  event.bind(this.child, 'touchmove', this.ontouchmove.bind(this));
-  event.bind(document, 'touchend', this.ontouchend.bind(this));
+  this.events = events(this.child, this);
+  this.events.bind('mousedown', 'ontouchstart');
+  this.events.bind('mousemove', 'ontouchmove');
+  this.events.bind('touchstart');
+  this.events.bind('touchmove');
+
+  this.docEvents = events(document, this);
+  this.docEvents.bind('mouseup', 'ontouchend');
+  this.docEvents.bind('touchend');
 };
 
 /**
@@ -57,7 +59,8 @@ Swipe.prototype.bind = function(){
  */
 
 Swipe.prototype.unbind = function(){
-  // TODO: me
+  this.events.unbind();
+  this.docEvents.unbind();
 };
 
 /**
