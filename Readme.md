@@ -52,6 +52,8 @@
   Show item with the given index `i` with the given
   transition in `ms` defaulting to the `.duration()` value.
 
+  Emit \`show\` event.
+
 ## License
 
   MIT
