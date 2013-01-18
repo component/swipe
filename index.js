@@ -22,7 +22,6 @@ module.exports = Swipe;
 function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
-  Emitter.call(this);
   this.el = el;
   this.child = el.children[0];
   this.total = this.child.children.length;
@@ -37,10 +36,10 @@ function Swipe(el) {
 }
 
 /**
- * Inherit from `Emitter.prototype`.
+ * Mixin `Emitter`.
  */
 
-Swipe.prototype = new Emitter;
+Emitter(Swipe.prototype);
 
 /**
 
