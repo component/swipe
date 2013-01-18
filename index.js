@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-var events = require('events');
+var events = require('events')
+  , Emitter = require('emitter');
 
 /**
  * Expose `Swipe`.
@@ -21,6 +22,7 @@ module.exports = Swipe;
 function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
+  Emitter.call(this);
   this.el = el;
   this.child = el.children[0];
   this.total = this.child.children.length;
@@ -33,6 +35,14 @@ function Swipe(el) {
   this.show(0, 0);
   this.bind();
 }
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Swipe.prototype = new Emitter;
+
+/**
 
 /**
  * Bind event handlers.
@@ -271,6 +281,8 @@ Swipe.prototype.next = function(){
 /**
  * Show slide `i`.
  *
+ * Emits `show `event
+ *
  * @param {Number} i
  * @return {Swipe} self
  * @api public
@@ -283,6 +295,7 @@ Swipe.prototype.show = function(i, ms){
   this.current = i;
   this.transitionDuration(ms);
   this.translate(x);
+  this.emit('show', this.current);
   return this;
 };
 
