@@ -1,0 +1,18 @@
+{
+  "name": "swipe",
+  "repo": "component/swipe",
+  "description": "Swipe component with touch support",
+  "version": "1.1.0",
+  "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
+  "dependencies": {
+    "emitter-component": "*",
+    "events-component-2": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "component": {
+    "scripts": {
+      "swipe/index.js": "index.js"
+    }
+  }
+}
