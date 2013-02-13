@@ -67,8 +67,8 @@
     <script>
       var swipe = require('swipe');
       var el = document.querySelector('#container');
-      var cats = swipe(el).on('show', function(ind){
-        console.log('Current ind: ', ind);
+      var cats = swipe(el).on('show', function(i){
+        console.log('Current index: ', i);
       });
       cats.interval(800);
     </script>
