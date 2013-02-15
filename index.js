@@ -24,11 +24,7 @@ function Swipe(el) {
   if (!el) throw new TypeError('Swipe() requires an element');
   this.el = el;
   this.child = el.children[0];
-  this.total = this.child.children.length;
-  this.childWidth = el.getBoundingClientRect().width;
-  this.width = this.childWidth * this.total | 0;
-  this.child.style.width = this.width + 'px';
-  this.child.style.height = this.height + 'px';
+  this.refresh();
   this.interval(5000);
   this.duration(300);
   this.show(0, 0);
@@ -42,6 +38,18 @@ function Swipe(el) {
 Emitter(Swipe.prototype);
 
 /**
+ * Refresh sizing data.
+ *
+ * @api public
+ */
+
+Swipe.prototype.refresh = function(){
+  this.total = this.child.children.length;
+  this.childWidth = el.getBoundingClientRect().width;
+  this.width = this.childWidth * this.total | 0;
+  this.child.style.width = this.width + 'px';
+  this.child.style.height = this.height + 'px';
+};
 
 /**
  * Bind event handlers.

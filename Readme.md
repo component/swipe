@@ -23,6 +23,11 @@
 
   Set the cycle interval, defaults to 5000ms.
 
+### .refresh()
+
+  This method should be invoked when the swipe element
+  has been resized, or an item has been added or removed.
+
 ### .play()
 
   Play through all items using the cycle interval.
