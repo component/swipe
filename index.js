@@ -27,7 +27,7 @@ function Swipe(el) {
   this.refresh();
   this.interval(5000);
   this.duration(300);
-  this.show(0, 0);
+  this.show(0, 0, { silent: true });
   this.bind();
 }
 
@@ -296,14 +296,15 @@ Swipe.prototype.next = function(){
  * @api public
  */
 
-Swipe.prototype.show = function(i, ms){
+Swipe.prototype.show = function(i, ms, options){
+  options = options || {};
   if (null == ms) ms = this._duration;
   i = Math.max(0, Math.min(i, this.total - 1));
   var x = this.childWidth * i;
   this.current = i;
   this.transitionDuration(ms);
   this.translate(x);
-  this.emit('show', this.current);
+  if (!options.silent) this.emit('show', this.current);
   return this;
 };
 
