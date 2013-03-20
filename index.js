@@ -221,6 +221,7 @@ Swipe.prototype.play = function(){
 
 Swipe.prototype.stop = function(){
   clearInterval(this.timer);
+  this.timer = null;
   return this;
 };
 
