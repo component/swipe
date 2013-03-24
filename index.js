@@ -49,7 +49,7 @@ Swipe.prototype.refresh = function(){
   this.width = this.childWidth * this.total | 0;
   this.child.style.width = this.width + 'px';
   this.child.style.height = this.height + 'px';
-  this.show(this.current, 0);
+  this.show(this.current, 0, { silent: true });
 };
 
 /**
