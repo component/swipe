@@ -1,4 +1,10 @@
 
+1.3.1 / 2013-03-24
+==================
+
+  * index: prevent bad `show` if `refresh` is called right after `cycle`
+  * index: make refresh `show` silent
+
 1.3.0 / 2013-03-05 
 ==================
 
