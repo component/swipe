@@ -46,7 +46,7 @@ Emitter(Swipe.prototype);
 Swipe.prototype.refresh = function(){
   this.total = this.child.children.length;
   this.childWidth = this.el.getBoundingClientRect().width;
-  this.width = this.childWidth * this.total | 0;
+  this.width = Math.ceil(this.childWidth * this.total) + 10;
   this.child.style.width = this.width + 'px';
   this.child.style.height = this.height + 'px';
   if (null != this.current && this.current > -1) {
