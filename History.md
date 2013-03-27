@@ -1,4 +1,9 @@
 
+1.3.2 / 2013-03-27
+==================
+
+  * index: make sure to give extra room for zoom changes
+
 1.3.1 / 2013-03-24
 ==================
 
