@@ -3,8 +3,10 @@
  * Module dependencies.
  */
 
-var events = require('events')
-  , Emitter = require('emitter');
+var events = require('events');
+var has3d = require('has-translate3d');
+var transform = require('transform-property');
+var Emitter = require('emitter');
 
 /**
  * Expose `Swipe`.
@@ -335,7 +337,9 @@ Swipe.prototype.transitionDuration = function(ms){
 Swipe.prototype.translate = function(x){
   var s = this.child.style;
   x = -x;
-  s.webkitTransform = s.MozTransform = 'translate3d(' + x + 'px, 0, 0)';
-  s.msTransform = s.OTransform = 'translateX(' + x + 'px)';
+  if (has3d) {
+    s[transform] = 'translate3d(' + x + 'px, 0, 0)';
+  } else {
+    s[transform] = 'translateX(' + x + 'px)';
+  }
 };
-
