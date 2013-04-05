@@ -6,7 +6,9 @@
   "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
   "dependencies": {
     "component/emitter": "*",
-    "component/events": "*"
+    "component/events": "*",
+    "component/has-translate3d": "*",
+    "component/transform-property": "*"
   },
   "development": {},
   "license": "MIT",
