@@ -1,4 +1,9 @@
 
+1.3.3 / 2013-04-05
+==================
+
+  * index: implemented proper feature detection
+
 1.3.2 / 2013-03-27
 ==================
 
