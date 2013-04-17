@@ -97,12 +97,9 @@ Swipe.prototype.ontouchstart = function(e){
 
   this.transitionDuration(0);
   this.dx = 0;
-  this.lock = false;
-  this.ignore = false;
 
   this.down = {
     x: e.pageX,
-    y: e.pageY,
     at: new Date
   };
 };
@@ -118,34 +115,16 @@ Swipe.prototype.ontouchstart = function(e){
  */
 
 Swipe.prototype.ontouchmove = function(e){
-  if (!this.down || this.ignore) return;
+  if (!this.down) return;
   if (e.touches && e.touches.length > 1) return;
-  if (e.touches) {
-    var ev = e;
-    e = e.touches[0];
-  }
+  e.stopPropagation();
+  e.preventDefault();
+  if (e.touches) e = e.touches[0];
   var s = this.down;
   var x = e.pageX;
   var w = this.childWidth;
   var i = this.current;
   this.dx = x - s.x;
-
-  // determine dy and the slope
-  if (!this.lock) {
-    this.lock = true;
-    var y = e.pageY;
-    this.dy = y - s.y;
-    var slope = this.dy / this.dx;
-
-    // if is greater than 1 or -1, we're swiping up/down
-    if (slope > 1 || slope < -1) {
-      this.ignore = true;
-      return;
-    }
-  }
-
-  (ev || e).stopPropagation();
-  (ev || e).preventDefault();
   var dir = this.dx < 0 ? 1 : 0;
   if (this.isFirst() && 0 == dir) this.dx /= 2;
   if (this.isLast() && 1 == dir) this.dx /= 2;
