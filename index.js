@@ -135,7 +135,7 @@ Swipe.prototype.ontouchmove = function(e){
     this.lock = true;
     var y = e.pageY;
     var dy = y - s.y;
-    var slope = this.dy / this.dx;
+    var slope = dy / this.dx;
 
     // if is greater than 1 or -1, we're swiping up/down
     if (slope > 1 || slope < -1) {
@@ -144,8 +144,11 @@ Swipe.prototype.ontouchmove = function(e){
     }
   }
 
-  (ev || e).stopPropagation();
+  // when we overwrite touch event with e.touches[0], it doesn't
+  // have the preventDefault method. e.preventDefault() prevents
+  // multiaxis scrolling when moving from left to right
   (ev || e).preventDefault();
+
   var dir = this.dx < 0 ? 1 : 0;
   if (this.isFirst() && 0 == dir) this.dx /= 2;
   if (this.isLast() && 1 == dir) this.dx /= 2;
