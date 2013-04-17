@@ -136,6 +136,8 @@ Swipe.prototype.ontouchmove = function(e){
     var y = e.pageY;
     this.dy = y - s.y;
     var slope = this.dy / this.dx;
+
+    // if is greater than 1 or -1, we're swiping up/down
     if (slope > 1 || slope < -1) {
       this.ignore = true;
       return;
