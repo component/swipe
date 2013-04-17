@@ -2,7 +2,7 @@
   "name": "swipe",
   "repo": "component/swipe",
   "description": "Swipe component with touch support",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
   "dependencies": {
     "emitter-component": "*",
