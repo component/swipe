@@ -134,7 +134,7 @@ Swipe.prototype.ontouchmove = function(e){
   if (!this.lock) {
     this.lock = true;
     var y = e.pageY;
-    this.dy = y - s.y;
+    var dy = y - s.y;
     var slope = this.dy / this.dx;
 
     // if is greater than 1 or -1, we're swiping up/down
