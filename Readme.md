@@ -23,6 +23,14 @@
 
   Set the cycle interval, defaults to 5000ms.
 
+### .add(el, [i])
+
+  Add an element `el` to the carousel with an optional index `i`.
+
+### .remove(i)
+
+  Remove the element at `i` from the carousel.
+
 ### .refresh()
 
   This method should be invoked when the swipe element

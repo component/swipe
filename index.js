@@ -48,6 +48,7 @@ Emitter(Swipe.prototype);
 Swipe.prototype.refresh = function(){
   this.total = this.child.children.length;
   this.childWidth = this.el.getBoundingClientRect().width;
+  // TODO: remove + 10px. arbitrary number to give extra room for zoom changes
   this.width = Math.ceil(this.childWidth * this.total) + 10;
   this.child.style.width = this.width + 'px';
   this.child.style.height = this.height + 'px';
@@ -334,6 +335,43 @@ Swipe.prototype.show = function(i, ms, options){
   this.transitionDuration(ms);
   this.translate(x);
   if (!options.silent) this.emit('show', this.current);
+  return this;
+};
+
+/**
+ * Add a pane to swipe
+ *
+ * @param {Element} el
+ * @param {Number} i
+ * @return {Swipe} self
+ * @api public
+ */
+
+Swipe.prototype.add = function(el, i){
+  var parent = this.child;
+  i = (undefined !== i) ? i : parent.children.length - 1;
+  var next = parent.children[i];
+  if (!next) return this;
+  parent.insertBefore(el, next);
+  if (i <= this.current) this.current++;
+  this.refresh();
+  return this;
+};
+
+/**
+ * Remove a pane from swipe
+ *
+ * @param {Number} i
+ * @return {Swipe} self
+ * @api public
+ */
+
+Swipe.prototype.remove = function(i){
+  var el = this.child.children[i];
+  if (!el) return this;
+  this.child.removeChild(el);
+  if (i < this.current) this.current--;
+  this.refresh();
   return this;
 };
 
