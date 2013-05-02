@@ -349,7 +349,7 @@ Swipe.prototype.show = function(i, ms, options){
 
 Swipe.prototype.add = function(el, i){
   var parent = this.child;
-  i = (undefined !== i) ? i : parent.children.length - 1;
+  i = (undefined == i) ? parent.children.length - 1 : i;
   var next = parent.children[i];
   if (!next) return this;
   parent.insertBefore(el, next);
