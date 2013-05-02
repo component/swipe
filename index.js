@@ -355,6 +355,7 @@ Swipe.prototype.add = function(el, i){
   parent.insertBefore(el, next);
   if (i <= this.current) this.current++;
   this.refresh();
+  return this;
 };
 
 /**
