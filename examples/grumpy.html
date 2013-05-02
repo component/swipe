@@ -62,6 +62,8 @@
     <button onclick="cats.next()">next</button>
     <button onclick="cats.play()">play</button>
     <button onclick="cats.stop()">stop</button>
+    <button onclick="cats.remove(0)">remove first</button>
+    <button onclick="add(0)">add first</button>
 
     <script src="../build/build.js"></script>
     <script>
@@ -71,6 +73,11 @@
         console.log('Current index: ', i);
       });
       cats.interval(800);
+
+      function add(i) {
+        cats.add(document.querySelector('ul li').cloneNode(true), i);
+      }
+
     </script>
   </body>
 </html>
