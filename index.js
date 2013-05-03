@@ -26,6 +26,9 @@ function Swipe(el) {
   if (!el) throw new TypeError('Swipe() requires an element');
   this.el = el;
   this.child = el.children[0];
+  this.currentEl = this.child.children[0];
+  this.current = 0;
+  this.total = this.child.children.length;
   this.refresh();
   this.interval(5000);
   this.duration(300);
@@ -46,7 +49,17 @@ Emitter(Swipe.prototype);
  */
 
 Swipe.prototype.refresh = function(){
-  this.total = this.child.children.length;
+  var i = this.indexOf(this.currentEl);
+  var total = this.child.children.length;
+
+  // we removed/added item(s), update current
+  if (total < this.total && i <= this.current && i >= 0) {
+    this.current -= this.current - i;
+  } else if(total > this.total && i > this.current) {
+    this.current += i - this.current;
+  }
+
+  this.total = total;
   this.childWidth = this.el.getBoundingClientRect().width;
   // TODO: remove + 10px. arbitrary number to give extra room for zoom changes
   this.width = Math.ceil(this.childWidth * this.total) + 10;
@@ -332,6 +345,7 @@ Swipe.prototype.show = function(i, ms, options){
   i = Math.max(0, Math.min(i, this.total - 1));
   var x = this.childWidth * i;
   this.current = i;
+  this.currentEl = this.child.children[i];
   this.transitionDuration(ms);
   this.translate(x);
   if (!options.silent) this.emit('show', this.current);
@@ -339,40 +353,13 @@ Swipe.prototype.show = function(i, ms, options){
 };
 
 /**
- * Add a pane to swipe
+ * Get the index of the current element
  *
- * @param {Element} el
- * @param {Number} i
- * @return {Swipe} self
- * @api public
+ * @api private
  */
 
-Swipe.prototype.add = function(el, i){
-  var parent = this.child;
-  i = (undefined == i) ? parent.children.length - 1 : i;
-  var next = parent.children[i];
-  if (!next) return this;
-  parent.insertBefore(el, next);
-  if (i <= this.current) this.current++;
-  this.refresh();
-  return this;
-};
-
-/**
- * Remove a pane from swipe
- *
- * @param {Number} i
- * @return {Swipe} self
- * @api public
- */
-
-Swipe.prototype.remove = function(i){
-  var el = this.child.children[i];
-  if (!el) return this;
-  this.child.removeChild(el);
-  if (i < this.current) this.current--;
-  this.refresh();
-  return this;
+Swipe.prototype.indexOf = function(el) {
+  return [].indexOf.call(this.child.children, el);
 };
 
 /**
