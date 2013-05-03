@@ -55,7 +55,7 @@ Swipe.prototype.refresh = function(){
   // we removed/added item(s), update current
   if (total < this.total && i <= this.current && i >= 0) {
     this.current -= this.current - i;
-  } else if(total > this.total && i > this.current) {
+  } else if (total > this.total && i > this.current) {
     this.current += i - this.current;
   }
 
