@@ -62,8 +62,10 @@
     <button onclick="cats.next()">next</button>
     <button onclick="cats.play()">play</button>
     <button onclick="cats.stop()">stop</button>
-    <button onclick="cats.remove(0)">remove first</button>
-    <button onclick="add(0)">add first</button>
+    <button onclick="removePane(0)">remove(0)</button>
+    <button onclick="addPane(0)">add(0)</button>
+    <button onclick="removePane(2)">remove(2)</button>
+    <button onclick="addPane(2)">add(2)</button>
 
     <script src="../build/build.js"></script>
     <script>
@@ -74,8 +76,21 @@
       });
       cats.interval(800);
 
-      function add(i) {
-        cats.add(document.querySelector('ul li').cloneNode(true), i);
+      function removePane(i) {
+        var parent = cats.child;
+        var el = parent.children[i];
+        if (!el) return;
+        parent.removeChild(el);
+        cats.refresh();
+      }
+
+      function addPane(i) {
+        var parent = cats.child;
+        var el = parent.children[i];
+        var li = document.querySelector('ul li').cloneNode(true);
+        if(!el) parent.appendChild(li);
+        else parent.insertBefore(li, el);
+        cats.refresh();
       }
 
     </script>
