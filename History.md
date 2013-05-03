@@ -1,4 +1,11 @@
 
+1.4.1 / 2013-05-03 
+==================
+
+  * remove .add()
+  * remove .remove()
+  * change .refresh() to detect dom changes 
+
 1.4.0 / 2013-05-02
 ==================
 
