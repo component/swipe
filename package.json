@@ -5,10 +5,10 @@
   "version": "1.4.1",
   "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
   "dependencies": {
-    "emitter-component": "*",
-    "events-component-2": "*",
-    "has-translate3d": "*",
-    "transform-property": "*"
+    "emitter-component": "1.0.0",
+    "events-component-2": "1.0.2",
+    "has-translate3d": "0.0.2",
+    "transform-property": "0.0.1"
   },
   "development": {},
   "license": "MIT",
