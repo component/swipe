@@ -1,4 +1,9 @@
 
+1.5.0 / 2013-05-28
+==================
+
+  * swipe is now display:none aware [MatthewMueller]
+
 1.4.2 / 2013-05-27 
 ==================
 
