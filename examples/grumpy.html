@@ -51,10 +51,10 @@
   <body>
     <div id="container">
       <ul>
-        <li style="background-image: url(http://www.digitaljournal.com/img/5/9/2/8/1/2/i/1/2/6/o/tard-Cat.jpg)"></li>
-        <li style="background-image: url(http://cdn.inquisitr.com/wp-content/2012/09/Grumpy-Cat-Tadar-Sauce.jpg)"></li>
-        <li style="background-image: url(http://newmediarockstars.com/wp-content/uploads/2012/10/GrumpyCat008.jpeg)"></li>
-        <li style="background-image: url(http://ksaz.images.worldnow.com/images/19768980_BG1.jpg)"></li>
+        <li class="angry" style="background-image: url(http://www.digitaljournal.com/img/5/9/2/8/1/2/i/1/2/6/o/tard-Cat.jpg)">angry</li>
+        <li class="tarter" style="background-image: url(http://cdn.inquisitr.com/wp-content/2012/09/Grumpy-Cat-Tadar-Sauce.jpg)">tarter</li>
+        <li class="wtf"style="background-image: url(http://newmediarockstars.com/wp-content/uploads/2012/10/GrumpyCat008.jpeg)">wtf</li>
+        <li class="grumpy" style="background-image: url(http://ksaz.images.worldnow.com/images/19768980_BG1.jpg)">grumpy</li>
       </ul>
     </div>
 
@@ -63,9 +63,14 @@
     <button onclick="cats.play()">play</button>
     <button onclick="cats.stop()">stop</button>
     <button onclick="removePane(0)">remove(0)</button>
-    <button onclick="addPane(0)">add(0)</button>
     <button onclick="removePane(2)">remove(2)</button>
+    <br>
+    <button onclick="addPane(0)">add(0)</button>
     <button onclick="addPane(2)">add(2)</button>
+    <button onclick="hide(0)">hide(0)</button>
+    <button onclick="hide(2)">hide(2)</button>
+    <button onclick="show(0)">show(0)</button>
+    <button onclick="show(2)">show(2)</button>
 
     <script src="../build/build.js"></script>
     <script>
@@ -90,6 +95,22 @@
         var li = document.querySelector('ul li').cloneNode(true);
         if(!el) parent.appendChild(li);
         else parent.insertBefore(li, el);
+        cats.refresh();
+      }
+
+      function hide(i) {
+        var parent = cats.child;
+        var el = parent.children[i];
+        if (!el) return;
+        el.style.display = 'none';
+        cats.refresh();
+      }
+
+      function show(i) {
+        var parent = cats.child;
+        var el = parent.children[i];
+        if (!el) return;
+        el.style.display = 'table-cell'
         cats.refresh();
       }
 

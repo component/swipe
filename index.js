@@ -7,6 +7,7 @@ var events = require('events');
 var has3d = require('has-translate3d');
 var transform = require('transform-property');
 var Emitter = require('emitter');
+var style = require('computed-style');
 
 /**
  * Expose `Swipe`.
@@ -49,8 +50,9 @@ Emitter(Swipe.prototype);
  */
 
 Swipe.prototype.refresh = function(){
-  var i = this.indexOf(this.currentEl);
-  var total = this.child.children.length;
+  var children = this.children();
+  var total = children.length;
+  var i = children.indexOf(this.currentEl);
 
   // we removed/added item(s), update current
   if (total < this.total && i <= this.current && i >= 0) {
@@ -344,8 +346,9 @@ Swipe.prototype.show = function(i, ms, options){
   if (null == ms) ms = this._duration;
   i = Math.max(0, Math.min(i, this.total - 1));
   var x = this.childWidth * i;
+  var children = this.children();
   this.current = i;
-  this.currentEl = this.child.children[i];
+  this.currentEl = children[i];
   this.transitionDuration(ms);
   this.translate(x);
   if (!options.silent) this.emit('show', this.current);
@@ -353,13 +356,18 @@ Swipe.prototype.show = function(i, ms, options){
 };
 
 /**
- * Get the index of the current element
+ * Get the visible children
  *
  * @api private
  */
 
-Swipe.prototype.indexOf = function(el) {
-  return [].indexOf.call(this.child.children, el);
+Swipe.prototype.children = function() {
+  var children = this.child.children;
+  var out = []
+  for (var i = 0, len = children.length; i < len; i++) {
+    if ('none' != style(children[i])['display']) out.push(children[i]);
+  }
+  return out;
 };
 
 /**
@@ -370,11 +378,11 @@ Swipe.prototype.indexOf = function(el) {
 
 Swipe.prototype.transitionDuration = function(ms){
   var s = this.child.style;
-  s.webkitTransitionDuration =
-  s.MozTransitionDuration =
-  s.msTransitionDuration =
-  s.OTransitionDuration =
-  s.transitionDuration = ms + 'ms';
+  s.webkitTransition = ms + 'ms -webkit-transform';
+  s.MozTransition = ms + 'ms -moz-transform';
+  s.msTransition = ms + 'ms -ms-transform';
+  s.OTransition = ms + 'ms -o-transform';
+  s.transition = ms + 'ms transform';
 };
 
 /**
