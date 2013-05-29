@@ -3,11 +3,13 @@
  * Module dependencies.
  */
 
-var events = require('events');
-var has3d = require('has-translate3d');
 var transform = require('transform-property');
-var Emitter = require('emitter');
+var has3d = require('has-translate3d');
 var style = require('computed-style');
+var Emitter = require('emitter');
+var events = require('events');
+var min = Math.min;
+var max = Math.max;
 
 /**
  * Expose `Swipe`.
@@ -25,11 +27,9 @@ module.exports = Swipe;
 function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
-  this.el = el;
   this.child = el.children[0];
-  this.currentEl = this.child.children[0];
   this.current = 0;
-  this.total = this.child.children.length;
+  this.el = el;
   this.refresh();
   this.interval(5000);
   this.duration(300);
@@ -51,25 +51,23 @@ Emitter(Swipe.prototype);
 
 Swipe.prototype.refresh = function(){
   var children = this.children();
-  var total = children.length;
-  var i = children.indexOf(this.currentEl);
+  var visible = children.visible.length;
+  var prev = this.visible || visible;
+
+  var i = indexOf(children.visible, this.currentEl);
 
   // we removed/added item(s), update current
-  if (total < this.total && i <= this.current && i >= 0) {
+  if (visible < prev && i <= this.current && i >= 0) {
     this.current -= this.current - i;
-  } else if(total > this.total && i > this.current) {
+  } else if (visible > prev && i > this.current) {
     this.current += i - this.current;
   }
 
-  this.total = total;
+  this.visible = visible;
   this.childWidth = this.el.getBoundingClientRect().width;
-  // TODO: remove + 10px. arbitrary number to give extra room for zoom changes
-  this.width = Math.ceil(this.childWidth * this.total) + 10;
+  this.width = Math.ceil(this.childWidth * visible);
   this.child.style.width = this.width + 'px';
   this.child.style.height = this.height + 'px';
-  if (null != this.current && this.current > -1) {
-    this.show(this.current, 0, { silent: true });
-  }
 };
 
 /**
@@ -286,7 +284,7 @@ Swipe.prototype.cycle = function(){
 };
 
 /**
- * Check if we're on the first slide.
+ * Check if we're on the first visible slide.
  *
  * @return {Boolean}
  * @api public
@@ -297,14 +295,14 @@ Swipe.prototype.isFirst = function(){
 };
 
 /**
- * Check if we're on the last slide.
+ * Check if we're on the last visible slide.
  *
  * @return {Boolean}
  * @api public
  */
 
 Swipe.prototype.isLast = function(){
-  return this.current == this.total - 1;
+  return this.currentIndex == this.visible - 1;
 };
 
 /**
@@ -344,30 +342,43 @@ Swipe.prototype.next = function(){
 Swipe.prototype.show = function(i, ms, options){
   options = options || {};
   if (null == ms) ms = this._duration;
-  i = Math.max(0, Math.min(i, this.total - 1));
-  var x = this.childWidth * i;
   var children = this.children();
-  this.current = i;
-  this.currentEl = children[i];
+  i = max(0, min(i, children.visible.length - 1));
+  this.currentIndex = i;
+  this.currentEl = children.visible[i];
+  this.current = indexOf(children.all, this.currentEl);
   this.transitionDuration(ms);
-  this.translate(x);
-  if (!options.silent) this.emit('show', this.current);
+  this.translate(this.childWidth * i);
+  if (!options.silent) this.emit('show', this.current, this.currentEl);
   return this;
 };
 
 /**
- * Get the visible children
+ * Return children categorized by visibility.
  *
+ * @return {Object}
  * @api private
  */
 
-Swipe.prototype.children = function() {
-  var children = this.child.children;
-  var out = []
-  for (var i = 0, len = children.length; i < len; i++) {
-    if ('none' != style(children[i])['display']) out.push(children[i]);
+Swipe.prototype.children = function(){
+  var els = this.child.children;
+
+  var ret = {
+    all: els,
+    visible: [],
+    hidden: []
+  };
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    if (visible(el)) {
+      ret.visible.push(el);
+    } else {
+      ret.hidden.push(el);
+    }
   }
-  return out;
+
+  return ret;
 };
 
 /**
@@ -392,6 +403,7 @@ Swipe.prototype.transitionDuration = function(ms){
  */
 
 Swipe.prototype.translate = function(x){
+  // TODO: use translate component
   var s = this.child.style;
   x = -x;
   if (has3d) {
@@ -400,3 +412,31 @@ Swipe.prototype.translate = function(x){
     s[transform] = 'translateX(' + x + 'px)';
   }
 };
+
+/**
+ * Return index of `el` in `els`.
+ *
+ * @param {Array} els
+ * @param {Element} el
+ * @return {Number}
+ * @api private
+ */
+
+function indexOf(els, el) {
+  for (var i = 0; i < els.length; i++) {
+    if (els[i] == el) return i;
+  }
+  return -1;
+}
+
+/**
+ * Check if `el` is visible.
+ *
+ * @param {Element} el
+ * @return {Boolean}
+ * @api private
+ */
+
+function visible(el) {
+  return style(el).display != 'none';
+}

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="../build/build.css">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
     <style>
       body {
@@ -34,6 +33,7 @@
         padding: 0;
         color: white;
         -webkit-user-select: none;
+        font-size: 30px;
       }
       button {
         margin: 5px 0;
@@ -51,10 +51,10 @@
   <body>
     <div id="container">
       <ul>
-        <li class="angry" style="background-image: url(http://www.digitaljournal.com/img/5/9/2/8/1/2/i/1/2/6/o/tard-Cat.jpg)">angry</li>
-        <li class="tarter" style="background-image: url(http://cdn.inquisitr.com/wp-content/2012/09/Grumpy-Cat-Tadar-Sauce.jpg)">tarter</li>
-        <li class="wtf"style="background-image: url(http://newmediarockstars.com/wp-content/uploads/2012/10/GrumpyCat008.jpeg)">wtf</li>
-        <li class="grumpy" style="background-image: url(http://ksaz.images.worldnow.com/images/19768980_BG1.jpg)">grumpy</li>
+        <li class="angry" style="background-image: url(http://www.digitaljournal.com/img/5/9/2/8/1/2/i/1/2/6/o/tard-Cat.jpg)"></li>
+        <li class="tarter" style="background-image: url(http://www.deargrumpycat.com/wp-content/uploads/2013/04/Grumpy-Cat.jpg)"></li>
+        <li class="wtf"style="background-image: url(http://newmediarockstars.com/wp-content/uploads/2012/10/GrumpyCat008.jpeg)"></li>
+        <li class="grumpy" style="background-image: url(http://ksaz.images.worldnow.com/images/19768980_BG1.jpg)"></li>
       </ul>
     </div>
 
@@ -76,10 +76,12 @@
     <script>
       var swipe = require('swipe');
       var el = document.querySelector('#container');
-      var cats = swipe(el).on('show', function(i){
-        console.log('Current index: ', i);
-      });
+      var cats = swipe(el);
       cats.interval(800);
+
+      // cats.on('show', function(i){
+      //   console.log('Current index: ', i);
+      // });
 
       function removePane(i) {
         var parent = cats.child;

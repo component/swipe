@@ -84,9 +84,111 @@
 
     <script src="../build/build.js"></script>
     <script>
+      var assert = require('assert');
       var swipe = require('swipe');
       var el = document.querySelector('#container');
-      swipe(el);
+      var s = swipe(el);
+
+      function nth(n) {
+        return el.querySelector('li:nth-child(' + n + ')');
+      }
+
+      // .next() / .prev()
+
+      assert(0 == s.current)
+      assert(nth(1) == s.currentEl)
+      assert(s.isFirst())
+
+      s.next()
+      assert(1 == s.current)
+      assert(nth(2) == s.currentEl)
+
+      s.prev()
+      assert(0 == s.current)
+      assert(nth(1) == s.currentEl)
+
+      s.next()
+      assert(1 == s.current)
+      assert(nth(2) == s.currentEl)
+
+      s.next()
+      assert(2 == s.current)
+      assert(nth(3) == s.currentEl)
+
+      s.next()
+      assert(3 == s.current)
+      assert(nth(4) == s.currentEl)
+      assert(s.isLast())
+
+      s.next()
+      assert(3 == s.current)
+      assert(nth(4) == s.currentEl)
+      assert(s.isLast())
+
+      // .show()
+
+      s.show(0)
+      assert(0 == s.current)
+      assert(nth(1) == s.currentEl)
+
+      // out of bounds
+
+      s.show(-5)
+      assert(0 == s.current)
+
+      s.show(15)
+      assert(3 == s.current)
+
+      // cycling
+
+      s.show(0);
+
+      s.cycle();
+      assert(1 == s.current)
+      s.cycle();
+      assert(2 == s.current)
+      s.cycle();
+      assert(3 == s.current)
+      s.cycle();
+      assert(0 == s.current)
+      s.cycle();
+      assert(1 == s.current)
+
+      // display: none
+
+      nth(1).style.display = 'none' // 0
+      nth(3).style.display = 'none' // 2
+      s.refresh()
+
+      s.show(0)
+      assert(1 == s.current)
+      assert(nth(2) == s.currentEl)
+
+      s.show(3)
+      assert(s.isLast())
+
+      // out of bounds with display: none
+
+      s.show(-5)
+      assert(1 == s.current)
+
+      s.show(15)
+      assert(3 == s.current)
+
+      // cycling with hidden
+
+      s.show(0);
+
+      s.cycle();
+      assert(3 == s.current)
+      s.cycle();
+      assert(1 == s.current)
+      s.cycle();
+      assert(3 == s.current)
+
+      // removal
+
+      // addition
     </script>
   </body>
 </html>

@@ -11,7 +11,9 @@
     "component/transform-property": "0.0.1",
     "jkroso/computed-style": "0.1.0"
   },
-  "development": {},
+  "development": {
+    "component/assert": "*"
+  },
   "license": "MIT",
   "scripts": [
     "index.js"
