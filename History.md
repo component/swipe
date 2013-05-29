@@ -1,4 +1,9 @@
 
+1.5.1 / 2013-05-29 
+==================
+
+ * fix .current relative to all elements and a few other subtle bugs
+
 1.5.0 / 2013-05-28
 ==================
 
