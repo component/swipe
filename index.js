@@ -28,6 +28,7 @@ function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
   this.child = el.children[0];
+  this.currentVisible = 0;
   this.current = 0;
   this.el = el;
   this.refresh();
@@ -57,10 +58,10 @@ Swipe.prototype.refresh = function(){
   var i = indexOf(children.visible, this.currentEl);
 
   // we removed/added item(s), update current
-  if (visible < prev && i <= this.current && i >= 0) {
-    this.current -= this.current - i;
-  } else if (visible > prev && i > this.current) {
-    this.current += i - this.current;
+  if (visible < prev && i <= this.currentVisible && i >= 0) {
+    this.currentVisible -= this.currentVisible - i;
+  } else if (visible > prev && i > this.currentVisible) {
+    this.currentVisible += i - this.currentVisible;
   }
 
   this.visible = visible;
@@ -141,7 +142,7 @@ Swipe.prototype.ontouchmove = function(e){
   var s = this.down;
   var x = e.pageX;
   var w = this.childWidth;
-  var i = this.current;
+  var i = this.currentVisible;
   this.dx = x - s.x;
 
   // determine dy and the slope
@@ -212,7 +213,7 @@ Swipe.prototype.ontouchend = function(e){
   if (0 == dir && half) return this.prev();
 
   // N -> N
-  this.show(this.current);
+  this.show(this.currentVisible);
 };
 
 /**
@@ -276,7 +277,7 @@ Swipe.prototype.stop = function(){
 
 Swipe.prototype.cycle = function(){
   if (this.isLast()) {
-    this.current = -1;
+    this.currentVisible = -1;
     this.next();
   } else {
     this.next();
@@ -291,7 +292,7 @@ Swipe.prototype.cycle = function(){
  */
 
 Swipe.prototype.isFirst = function(){
-  return this.currentVisibleIndex == 0;
+  return this.currentVisible == 0;
 };
 
 /**
@@ -302,7 +303,7 @@ Swipe.prototype.isFirst = function(){
  */
 
 Swipe.prototype.isLast = function(){
-  return this.currentVisibleIndex == this.visible - 1;
+  return this.currentVisible == this.visible - 1;
 };
 
 /**
@@ -313,7 +314,7 @@ Swipe.prototype.isLast = function(){
  */
 
 Swipe.prototype.prev = function(){
-  this.show(this.current - 1);
+  this.show(this.currentVisible - 1);
   return this;
 };
 
@@ -325,7 +326,7 @@ Swipe.prototype.prev = function(){
  */
 
 Swipe.prototype.next = function(){
-  this.show(this.current + 1);
+  this.show(this.currentVisible + 1);
   return this;
 };
 
@@ -344,7 +345,7 @@ Swipe.prototype.show = function(i, ms, options){
   if (null == ms) ms = this._duration;
   var children = this.children();
   i = max(0, min(i, children.visible.length - 1));
-  this.currentVisibleIndex = i;
+  this.currentVisible = i;
   this.currentEl = children.visible[i];
   this.current = indexOf(children.all, this.currentEl);
   this.transitionDuration(ms);
