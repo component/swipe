@@ -1,4 +1,12 @@
 
+1.5.2 / 2013-05-31 
+==================
+
+ * fix show on .refresh() regression
+ * fix support for hidden slides
+ * fix .isFirst(), should be visible only
+ * change currentIndex -> currentVisibleIndex
+
 1.5.1 / 2013-05-29 
 ==================
 
