@@ -28,6 +28,7 @@ function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
   this.child = el.children[0];
+  this.currentEl = this.children().visible[0];
   this.currentVisible = 0;
   this.current = 0;
   this.el = el;
