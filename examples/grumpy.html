@@ -76,11 +76,11 @@
     <button onclick="cats.next()">next</button>
     <button onclick="cats.play()">play</button>
     <button onclick="cats.stop()">stop</button>
-    <button onclick="removePane(0)">remove(0)</button>
-    <button onclick="removePane(2)">remove(2)</button>
+    <button onclick="remove(0)">remove(0)</button>
+    <button onclick="remove(2)">remove(2)</button>
     <br>
-    <button onclick="addPane(0)">add(0)</button>
-    <button onclick="addPane(2)">add(2)</button>
+    <button onclick="add(0)">add(0)</button>
+    <button onclick="add(2)">add(2)</button>
     <button onclick="hide(0)">hide(0)</button>
     <button onclick="hide(2)">hide(2)</button>
     <button onclick="show(0)">show(0)</button>
@@ -103,7 +103,7 @@
         cats.refresh();
       }
 
-      function removePane(i) {
+      function remove(i) {
         var parent = cats.child;
         var el = parent.children[i];
         if (!el) return;
@@ -111,7 +111,7 @@
         cats.refresh();
       }
 
-      function addPane(i) {
+      function add(i) {
         var parent = cats.child;
         var el = parent.children[i];
         var li = document.querySelector('ul li').cloneNode(true);
