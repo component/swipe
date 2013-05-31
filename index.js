@@ -399,11 +399,12 @@ Swipe.prototype.transitionDuration = function(ms){
 /**
  * Translate to `x`.
  *
+ * TODO: use translate component
+ *
  * @api private
  */
 
 Swipe.prototype.translate = function(x){
-  // TODO: use translate component
   var s = this.child.style;
   x = -x;
   if (has3d) {
