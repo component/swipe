@@ -291,7 +291,7 @@ Swipe.prototype.cycle = function(){
  */
 
 Swipe.prototype.isFirst = function(){
-  return this.current == 0;
+  return this.currentVisibleIndex == 0;
 };
 
 /**

@@ -38,11 +38,11 @@
 
 ### .isFirst()
 
-  Is on the first item.
+  Is on the first visible item.
 
 ### .isLast()
 
-  Is on the last item.
+  Is on the last visisble item.
 
 ### .prev()
 
