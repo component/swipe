@@ -405,7 +405,7 @@ Swipe.prototype.transitionDuration = function(ms){
 Swipe.prototype.translate = function(x){
   // TODO: use translate component
   var s = this.child.style;
-  x = -x;
+  x = -x | 0;
   if (has3d) {
     s[transform] = 'translate3d(' + x + 'px, 0, 0)';
   } else {
