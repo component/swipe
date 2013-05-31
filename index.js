@@ -302,7 +302,7 @@ Swipe.prototype.isFirst = function(){
  */
 
 Swipe.prototype.isLast = function(){
-  return this.currentIndex == this.visible - 1;
+  return this.currentVisibleIndex == this.visible - 1;
 };
 
 /**
@@ -344,7 +344,7 @@ Swipe.prototype.show = function(i, ms, options){
   if (null == ms) ms = this._duration;
   var children = this.children();
   i = max(0, min(i, children.visible.length - 1));
-  this.currentIndex = i;
+  this.currentVisibleIndex = i;
   this.currentEl = children.visible[i];
   this.current = indexOf(children.all, this.currentEl);
   this.transitionDuration(ms);
