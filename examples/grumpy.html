@@ -7,16 +7,23 @@
         padding: 5px;
         font: 14px "Helvetica Neue", Helvetica, Arial;
       }
+
       #container {
         width: 295px;
         height: 380px;
         overflow: hidden;
       }
+
+      .larger #container {
+        width: 500px;
+      }
+
       ul {
         margin: 0;
         padding: 0;
         height: 380px;
       }
+
       ul li {
         display: table-cell;
         vertical-align: top;
@@ -35,6 +42,11 @@
         -webkit-user-select: none;
         font-size: 30px;
       }
+
+      .larger ul li {
+        width: 500px;
+      }
+
       button {
         margin: 5px 0;
         border: 1px solid #ddd;
@@ -43,6 +55,7 @@
         border-radius: 2px;
         cursor: pointer;
       }
+
       button:hover {
         background: #fff;
       }
@@ -71,6 +84,7 @@
     <button onclick="hide(2)">hide(2)</button>
     <button onclick="show(0)">show(0)</button>
     <button onclick="show(2)">show(2)</button>
+    <button onclick="resize()">resize()</button>
 
     <script src="../build/build.js"></script>
     <script>
@@ -82,6 +96,11 @@
       // cats.on('show', function(i){
       //   console.log('Current index: ', i);
       // });
+
+      function resize() {
+        document.body.className = 'larger';
+        cats.refresh();
+      }
 
       function removePane(i) {
         var parent = cats.child;
