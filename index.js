@@ -70,7 +70,7 @@ Swipe.prototype.refresh = function(){
   this.width = Math.ceil(this.childWidth * visible);
   this.child.style.width = this.width + 'px';
   this.child.style.height = this.height + 'px';
-  this.show(this.currentVisible, 0);
+  this.show(this.currentVisible, 0, { silent: false });
 };
 
 /**
