@@ -109,13 +109,10 @@ Swipe.prototype.unbind = function(){
  */
 
 Swipe.prototype.ontouchstart = function(e){
-  e.stopPropagation();
   if (e.touches) e = e.touches[0];
 
   this.transitionDuration(0);
   this.dx = 0;
-  this.lock = false;
-  this.ignore = false;
 
   this.down = {
     x: e.pageX,
@@ -135,36 +132,15 @@ Swipe.prototype.ontouchstart = function(e){
  */
 
 Swipe.prototype.ontouchmove = function(e){
-  if (!this.down || this.ignore) return;
+  if (!this.down) return;
   if (e.touches && e.touches.length > 1) return;
-  if (e.touches) {
-    var ev = e;
-    e = e.touches[0];
-  }
+  e = (e.touches) ? e.touches[0] : e;
+
   var s = this.down;
   var x = e.pageX;
   var w = this.childWidth;
   var i = this.currentVisible;
   this.dx = x - s.x;
-
-  // determine dy and the slope
-  if (!this.lock) {
-    this.lock = true;
-    var y = e.pageY;
-    var dy = y - s.y;
-    var slope = dy / this.dx;
-
-    // if is greater than 1 or -1, we're swiping up/down
-    if (slope > 1 || slope < -1) {
-      this.ignore = true;
-      return;
-    }
-  }
-
-  // when we overwrite touch event with e.touches[0], it doesn't
-  // have the preventDefault method. e.preventDefault() prevents
-  // multiaxis scrolling when moving from left to right
-  (ev || e).preventDefault();
 
   var dir = this.dx < 0 ? 1 : 0;
   if (this.isFirst() && 0 == dir) this.dx /= 2;
@@ -180,7 +156,6 @@ Swipe.prototype.ontouchmove = function(e){
 
 Swipe.prototype.ontouchend = function(e){
   if (!this.down) return;
-  e.stopPropagation();
 
   // touches
   if (e.changedTouches) e = e.changedTouches[0];
