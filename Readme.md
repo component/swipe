@@ -15,6 +15,17 @@
   that wraps a list of several items. View ./example.html for a
   working example.
 
+### .threshold(n)
+
+  Set the swipe threshold to `n`.
+
+  This is the factor required for swipe
+  to detect when a slide has passed the
+  given threshold, and may display the next
+  or previous slide. For example the default
+  of `.5` means that the user must swipe _beyond_
+  half of the side width.
+
 ### .duration(ms)
 
   Set the transition duration, defaults to 300ms.

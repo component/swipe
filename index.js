@@ -35,6 +35,7 @@ function Swipe(el) {
   this.refresh();
   this.interval(5000);
   this.duration(300);
+  this.threshold(.5);
   this.show(0, 0, { silent: true });
   this.bind();
 }
@@ -44,6 +45,24 @@ function Swipe(el) {
  */
 
 Emitter(Swipe.prototype);
+
+/**
+ * Set the swipe threshold to `n`.
+ *
+ * This is the factor required for swipe
+ * to detect when a slide has passed the
+ * given threshold, and may display the next
+ * or previous slide. For example the default
+ * of `.5` means that the user must swipe _beyond_
+ * half of the side width.
+ *
+ * @param {Number} n
+ * @api public
+ */
+
+Swipe.prototype.threshold = function(n){
+  this._threshold = n;
+};
 
 /**
  * Refresh sizing data.
@@ -192,7 +211,7 @@ Swipe.prototype.ontouchend = function(e){
 
   // < 200ms swipe
   var ms = new Date - this.down.at;
-  var threshold = ms < 200 ? w / 10 : w / 2;
+  var threshold = ms < 200 ? w / 10 : w * this._threshold;
   var dir = dx < 0 ? 1 : 0;
   var half = Math.abs(dx) >= threshold;
 
