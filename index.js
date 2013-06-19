@@ -35,6 +35,7 @@ function Swipe(el) {
   this.refresh();
   this.interval(5000);
   this.duration(300);
+  this.fastThreshold(200);
   this.threshold(.5);
   this.show(0, 0, { silent: true });
   this.bind();
@@ -62,6 +63,23 @@ Emitter(Swipe.prototype);
 
 Swipe.prototype.threshold = function(n){
   this._threshold = n;
+};
+
+/**
+ * Set the "fast" swipe threshold to `ms`.
+ *
+ * This is the amount of time in milliseconds
+ * which determines if a swipe was "fast" or not. When
+ * the swipe's duration is less than `ms` only 1/10th of
+ * the slide's width must be exceeded to display the previous
+ * or next slide.
+ *
+ * @param {Number} n
+ * @api public
+ */
+
+Swipe.prototype.fastThreshold = function(ms){
+  this._fastThreshold = ms;
 };
 
 /**
@@ -211,7 +229,7 @@ Swipe.prototype.ontouchend = function(e){
 
   // < 200ms swipe
   var ms = new Date - this.down.at;
-  var threshold = ms < 200 ? w / 10 : w * this._threshold;
+  var threshold = ms < this._fastThreshold ? w / 10 : w * this._threshold;
   var dir = dx < 0 ? 1 : 0;
   var half = Math.abs(dx) >= threshold;
 

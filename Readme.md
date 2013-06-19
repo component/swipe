@@ -26,6 +26,16 @@
   of `.5` means that the user must swipe _beyond_
   half of the side width.
 
+### .fastThreshold(ms)
+
+ Set the "fast" swipe threshold to `ms`.
+
+ This is the amount of time in milliseconds
+ which determines if a swipe was "fast" or not. When
+ the swipe's duration is less than `ms` only 1/10th of
+ the slide's width must be exceeded to display the previous
+ or next slide.
+
 ### .duration(ms)
 
   Set the transition duration, defaults to 300ms.
