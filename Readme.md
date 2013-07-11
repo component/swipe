@@ -9,8 +9,8 @@
 
 ## Events
 
-- `showing` (i, pane): when transition to another pane begins
-- `show` (i, pane): when transition to another pane finishes
+- `showing` (i, pane): when the transition to another pane begins
+- `show` (i, pane): when the transition to another pane finishes
 
 ## API
 
