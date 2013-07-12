@@ -6,9 +6,11 @@
   "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
   "dependencies": {
     "component/emitter": "1.0.0",
+    "component/event": "0.1.0",
     "component/events": "1.0.2",
     "component/has-translate3d": "0.0.2",
     "component/transform-property": "0.0.1",
+    "component/transitionend-property": "0.0.2",
     "jkroso/computed-style": "0.1.0"
   },
   "development": {

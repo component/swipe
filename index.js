@@ -7,9 +7,11 @@ var transform = require('transform-property');
 var has3d = require('has-translate3d');
 var style = require('computed-style');
 var Emitter = require('emitter');
+var event = require('event');
 var events = require('events');
 var min = Math.min;
 var max = Math.max;
+var transitionend = require('transitionend-property');
 
 /**
  * Expose `Swipe`.
@@ -382,6 +384,7 @@ Swipe.prototype.next = function(){
 Swipe.prototype.show = function(i, ms, options){
   options = options || {};
   if (null == ms) ms = this._duration;
+  var self = this;
   var children = this.children();
   i = max(0, min(i, children.visible.length - 1));
   this.currentVisible = i;
@@ -389,7 +392,15 @@ Swipe.prototype.show = function(i, ms, options){
   this.current = indexOf(children.all, this.currentEl);
   this.transitionDuration(ms);
   this.translate(this.childWidth * i);
-  if (!options.silent) this.emit('show', this.current, this.currentEl);
+
+  if (!options.silent) {
+    this.emit('showing', this.current, this.currentEl);
+    if (!ms) return this;
+    event.bind(this.child, transitionend, function shown() {
+      if (self.current == i) self.emit('show', self.current, self.currentEl);
+      event.unbind(self.child, transitionend, shown);
+    });
+  }
   return this;
 };
 
