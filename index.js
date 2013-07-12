@@ -392,11 +392,12 @@ Swipe.prototype.show = function(i, ms, options){
   this.current = indexOf(children.all, this.currentEl);
   this.transitionDuration(ms);
   this.translate(this.childWidth * i);
+
   if (!options.silent) {
     this.emit('showing', this.current, this.currentEl);
     if (!ms) return this;
     event.bind(this.child, transitionend, function shown() {
-      self.emit('show', self.current, self.currentEl);
+      if (self.current == i) self.emit('show', self.current, self.currentEl);
       event.unbind(self.child, transitionend, shown);
     });
   }
