@@ -1,5 +1,10 @@
 
-1.6.0 / 2013-06-19 
+1.7.0 / 2013-07-11
+==================
+
+  * replace `show` event with `showing`, wait till transitionend to emit `show`
+
+1.6.0 / 2013-06-19
 ==================
 
  * add Swipe#fastThreshold(ms)
@@ -15,7 +20,7 @@
 
   * index: make `refresh` not emit events
 
-1.5.2 / 2013-05-31 
+1.5.2 / 2013-05-31
 ==================
 
  * fix show on .refresh() regression
@@ -23,7 +28,7 @@
  * fix .isFirst(), should be visible only
  * change currentIndex -> currentVisibleIndex
 
-1.5.1 / 2013-05-29 
+1.5.1 / 2013-05-29
 ==================
 
  * fix .current relative to all elements and a few other subtle bugs
@@ -33,17 +38,17 @@
 
   * swipe is now display:none aware [MatthewMueller]
 
-1.4.2 / 2013-05-27 
+1.4.2 / 2013-05-27
 ==================
 
  * pin deps
 
-1.4.1 / 2013-05-03 
+1.4.1 / 2013-05-03
 ==================
 
   * remove .add()
   * remove .remove()
-  * change .refresh() to detect dom changes 
+  * change .refresh() to detect dom changes
 
 1.4.0 / 2013-05-02
 ==================
