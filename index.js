@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+var transitionend = require('transitionend-property');
 var transform = require('transform-property');
 var has3d = require('has-translate3d');
 var style = require('computed-style');
@@ -11,7 +12,6 @@ var event = require('event');
 var events = require('events');
 var min = Math.min;
 var max = Math.max;
-var transitionend = require('transitionend-property');
 
 /**
  * Expose `Swipe`.
