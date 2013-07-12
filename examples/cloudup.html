@@ -1,0 +1,87 @@
+<html>
+<head>
+  <title>cloudup</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font: 14px "Raleway", "Helvetica Neue", Helvetica, Arial;
+      font-weight: 300;
+      background: #222;
+      color: #eee;
+    }
+
+    h1 {
+      padding: 10px 30px;
+      margin-bottom: 10px;
+    }
+
+    #stream {
+      max-width: 1280px;
+      max-height: 800px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    ul li {
+      display: table-cell;
+      list-style: none;
+      margin: 0;
+      cursor: ew-resize;
+    }
+
+    #stream img {
+      -webkit-user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>cloudup</h1>
+  <div id="stream">
+    <ul>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03310_sapphirepool_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03309_damnationcreektrail_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03307_sfnighttimeskyline_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03306_southslope_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03053_knifesedge_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03310_sapphirepool_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03309_damnationcreektrail_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03307_sfnighttimeskyline_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03306_southslope_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03053_knifesedge_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03310_sapphirepool_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03309_damnationcreektrail_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03307_sfnighttimeskyline_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03306_southslope_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03053_knifesedge_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03310_sapphirepool_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03309_damnationcreektrail_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03307_sfnighttimeskyline_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03306_southslope_1280x800.jpg" alt=""></li>
+      <li class="pane"><img src="http://interfacelift.com/wallpaper/D47cd523/03053_knifesedge_1280x800.jpg" alt=""></li>
+    </ul>
+  </div>
+
+  <script src="../build/build.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var Swipe = require('swipe');
+    var swipe = Swipe(stream);
+
+    swipe.on('show', function(i) {
+      console.log('shown.');
+    });
+
+    window.addEventListener('keyup', function(e) {
+      if (e.keyCode == 37) swipe.prev();
+      if (e.keyCode == 39) swipe.next();
+    });
+  </script>
+</body>
+</html>
