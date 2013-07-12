@@ -7,6 +7,11 @@
 
     $ component install component/swipe
 
+## Events
+
+- `showing` (i, pane): when the transition to another pane begins
+- `show` (i, pane): when the transition to another pane finishes
+
 ## API
 
 ### Swipe(el)
@@ -73,12 +78,12 @@
 
   Show the next item if present, or do nothing.
 
-### .show(i, [ms])
+### .show(i, [ms], [options])
 
   Show item with the given index `i` with the given
   transition in `ms` defaulting to the `.duration()` value.
 
-  Emit \`show\` event passing the element index and the element itself.
+  You may pass `{ silent: true }` as an option to silence show events.
 
 ## License
 
