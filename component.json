@@ -2,6 +2,7 @@
   "name": "swipe",
   "repo": "component/swipe",
   "description": "Swipe component with touch support",
+  "demo": "http://component.github.io/swipe/",
   "version": "1.7.0",
   "keywords": ["carousel", "slide", "slides", "swipe", "touch", "ui"],
   "dependencies": {
