@@ -6,82 +6,142 @@
       * {
         box-sizing: border-box;
       }
-      body {
-        padding: 5px;
-        font: 14px "Helvetica Neue", Helvetica, Arial;
-      }
-      #container {
-        width: 295px;
-        height: 380px;
-        overflow: hidden;
-      }
-      ul {
-        margin: 0;
-        padding: 0;
-        height: 380px;
-      }
-      ul li {
-        display: table-cell;
-        background: #f8f8f8;
-        color: #888;
-        width: 300px;
-        height: 380px;
-        list-style: none;
-        margin: 0;
-        padding: 50px;
-        -webkit-user-select: none;
-        border: 1px solid #ddd;
-        border-radius: 2px;
-      }
-      button {
-        margin: 5px 0;
-        border: 1px solid #ddd;
-        padding: 5px 10px;
-        background: #eee;
-        border-radius: 2px;
-        cursor: pointer;
-      }
-      button:hover {
-        background: #fff;
-      }
 
-      .reader {
+      html, body {
         height: 100%;
         width: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        /*padding: 5px;*/
+        font: 14px "Helvetica Neue", Helvetica, Arial;
+        margin: 0;
+        padding:0;
+      }
+      #container {
+        height: 100%;
+        overflow: hidden;
+      }
+      .panes {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      .panes .pane {
+        float: left;
+        background: #f8f8f8;
+        color: #888;
+        width: 320px;
+        height: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 20px;
+        -webkit-user-select: none;
         overflow-y: scroll;
+        overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
       }
+
+
+      .panes .pane:nth-child(even) {
+        background: #042831;
+      }
+
+      /*.reader {
+        height: 100%;
+        width: 100%;
+      }*/
 
     </style>
   </head>
   <body>
     <div id="container">
-      <ul>
-        <li>
-          <div class="reader">
-            <h1>One</h1>
-            <p>This is the first example page. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id mauris arcu. Ut vestibulum, neque sit amet lacinia dictum, nibh neque commodo orci, at tincidunt neque turpis a nulla. Donec sit amet imperdiet eros. Etiam et eros in lacus convallis pretium. Integer sit amet aliquam ligula. Ut id lorem elit, ut commodo nulla. Suspendisse id tortor nec sem commodo tincidunt. Curabitur ligula sem, gravida id adipiscing non, consequat sit amet neque. Sed hendrerit varius consequat. Etiam vel purus at est pretium commodo. Proin convallis tempor fringilla. Pellentesque non quam vitae ipsum aliquet auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam non mauris ipsum. Nunc vitae ipsum quis augue sagittis accumsan.</p>
-          </div>
-        </li>
+      <div class="panes">
+        <div class="pane">
+          <h1>One</h1>
+          <p>"Granser," he announced, "you make me sick with your gabble. Why don't you tell about the Red Death? If you ain't going to, say so, an' we'll start back for camp."
+The old man looked at him and silently began to cry. The weak tears of age rolled down his cheeks and all the feebleness of his eighty-seven years showed in his grief-stricken countenance.
+"Sit down," Edwin counselled soothingly. "Granser's all right. He's just gettin' to the Scarlet Death, ain't you, Granser? He's just goin' to tell us about it right now. Sit down, Hare-Lip. Go ahead, Granser."
+The old man wiped the tears away on his grimy knuckles and took up the tale in a tremulous, piping voice that soon strengthened as he got the swing of the narrative.
+"It was in the summer of 2013 that the Plague came. I was twenty-seven years old, and well do I remember it. Wireless despatches—"</p>
+          <p>"Granser," he announced, "you make me sick with your gabble. Why don't you tell about the Red Death? If you ain't going to, say so, an' we'll start back for camp."
+The old man looked at him and silently began to cry. The weak tears of age rolled down his cheeks and all the feebleness of his eighty-seven years showed in his grief-stricken countenance.
+"Sit down," Edwin counselled soothingly. "Granser's all right. He's just gettin' to the Scarlet Death, ain't you, Granser? He's just goin' to tell us about it right now. Sit down, Hare-Lip. Go ahead, Granser."
+The old man wiped the tears away on his grimy knuckles and took up the tale in a tremulous, piping voice that soon strengthened as he got the swing of the narrative.
+"It was in the summer of 2013 that the Plague came. I was twenty-seven years old, and well do I remember it. Wireless despatches—"</p>
+        </div>
 
-        <li>
+        <div class="pane">
           <h1>Two</h1>
-          <p>This is the second example page.</p>
+          <p>The morning after the balloon had gone up with Oz, the four travelers met in the Throne Room and talked matters over.  The Scarecrow sat in the big throne and the others stood respectfully before him.</p>
 
-        </li>
+          <p>"We are not so unlucky," said the new ruler, "for this Palace and the Emerald City belong to us, and we can do just as we please.  When I remember that a short time ago I was up on a pole in a farmer's cornfield, and that now I am the ruler of this beautiful City, I am quite satisfied with my lot."</p>
 
-        <li>
+          <p>"I also," said the Tin Woodman, "am well-pleased with my new heart; and, really, that was the only thing I wished in all the world."</p>
+
+          <p>"For my part, I am content in knowing I am as brave as any beast that ever lived, if not braver," said the Lion modestly.</p>
+
+          <p>"If Dorothy would only be contented to live in the Emerald City," continued the Scarecrow, "we might all be happy together."</p>
+          <p>The morning after the balloon had gone up with Oz, the four travelers met in the Throne Room and talked matters over.  The Scarecrow sat in the big throne and the others stood respectfully before him.</p>
+
+          <p>"We are not so unlucky," said the new ruler, "for this Palace and the Emerald City belong to us, and we can do just as we please.  When I remember that a short time ago I was up on a pole in a farmer's cornfield, and that now I am the ruler of this beautiful City, I am quite satisfied with my lot."</p>
+
+          <p>"I also," said the Tin Woodman, "am well-pleased with my new heart; and, really, that was the only thing I wished in all the world."</p>
+
+          <p>"For my part, I am content in knowing I am as brave as any beast that ever lived, if not braver," said the Lion modestly.</p>
+
+          <p>"If Dorothy would only be contented to live in the Emerald City," continued the Scarecrow, "we might all be happy together."</p>
+
+        </div>
+
+        <div class="pane">
           <h1>Three</h1>
-          <p>This is the third example page.</p>
-        </li>
+          <p>"And I should never get back to Kansas," said Dorothy.</p>
 
-        <li>
+          <p>"We must certainly get to the Emerald City if we can," the Scarecrow continued, and he pushed so hard on his long pole that it stuck fast in the mud at the bottom of the river.  Then, before he could pull it out again--or let go--the raft was swept away, and the poor Scarecrow left clinging to the pole in the middle of the river.</p>
+
+          <p>"Good-bye!" he called after them, and they were very sorry to leave him.  Indeed, the Tin Woodman began to cry, but fortunately remembered that he might rust, and so dried his tears on Dorothy's apron.</p>
+
+          <p>Of course this was a bad thing for the Scarecrow.</p>
+
+          <p>"I am now worse off than when I first met Dorothy," he thought.  "Then, I was stuck on a pole in a cornfield, where I could make-believe scare the crows, at any rate.  But surely there is no use for a Scarecrow stuck on a pole in the middle of a river.  I am afraid I shall never have any brains, after all!"</p>
+
+          <p>"And I should never get back to Kansas," said Dorothy.</p>
+
+          <p>"We must certainly get to the Emerald City if we can," the Scarecrow continued, and he pushed so hard on his long pole that it stuck fast in the mud at the bottom of the river.  Then, before he could pull it out again--or let go--the raft was swept away, and the poor Scarecrow left clinging to the pole in the middle of the river.</p>
+
+          <p>"Good-bye!" he called after them, and they were very sorry to leave him.  Indeed, the Tin Woodman began to cry, but fortunately remembered that he might rust, and so dried his tears on Dorothy's apron.</p>
+
+          <p>Of course this was a bad thing for the Scarecrow.</p>
+
+          <p>"I am now worse off than when I first met Dorothy," he thought.  "Then, I was stuck on a pole in a cornfield, where I could make-believe scare the crows, at any rate.  But surely there is no use for a Scarecrow stuck on a pole in the middle of a river.  I am afraid I shall never have any brains, after all!"</p>
+        </div>
+
+        <div class="pane">
           <h1>Four</h1>
-          <p>This is the fourth example page.</p>
-        </li>
-      </ul>
-    </div>
+          <p>"In eighty days," interrupted Phileas Fogg.</p>
 
+          <p>"That is true, gentlemen," added John Sullivan.  "Only eighty days, now that the section between Rothal and Allahabad, on the Great Indian Peninsula Railway, has been opened.  Here is the estimate made by the Daily Telegraph:</p>
+
+          <p>"Yes, in eighty days!" exclaimed Stuart, who in his excitement made a false deal.  "But that doesn't take into account bad weather, contrary winds, shipwrecks, railway accidents, and so on."</p>
+
+          <p>"All included," returned Phileas Fogg, continuing to play despite the discussion.</p>
+
+          <p>"But suppose the Hindoos or Indians pull up the rails," replied Stuart; "suppose they stop the trains, pillage the luggage-vans, and scalp the passengers!"</p>
+          <p>"In eighty days," interrupted Phileas Fogg.</p>
+
+          <p>"That is true, gentlemen," added John Sullivan.  "Only eighty days, now that the section between Rothal and Allahabad, on the Great Indian Peninsula Railway, has been opened.  Here is the estimate made by the Daily Telegraph:</p>
+
+          <p>"Yes, in eighty days!" exclaimed Stuart, who in his excitement made a false deal.  "But that doesn't take into account bad weather, contrary winds, shipwrecks, railway accidents, and so on."</p>
+
+          <p>"All included," returned Phileas Fogg, continuing to play despite the discussion.</p>
+
+          <p>"But suppose the Hindoos or Indians pull up the rails," replied Stuart; "suppose they stop the trains, pillage the luggage-vans, and scalp the passengers!"</p>
+        </div>
+      </div>
+    </div>
     <script src="../build/build.js"></script>
     <script>
       var swipe = require('swipe');

@@ -148,17 +148,17 @@ Swipe.prototype.unbind = function(){
  */
 
 Swipe.prototype.ontouchstart = function(e){
-  e.stopPropagation();
-  if (e.touches) e = e.touches[0];
+  var touches = e.changedTouches;
+  if (!touches) return;
+  touches = touches[0];
 
   this.transitionDuration(0);
   this.dx = 0;
-  this.lock = false;
-  this.ignore = false;
+  this.updown = null;
 
   this.down = {
-    x: e.pageX,
-    y: e.pageY,
+    x: touches.pageX,
+    y: touches.pageY,
     at: new Date
   };
 };
@@ -174,36 +174,35 @@ Swipe.prototype.ontouchstart = function(e){
  */
 
 Swipe.prototype.ontouchmove = function(e){
-  if (!this.down || this.ignore) return;
-  if (e.touches && e.touches.length > 1) return;
-  if (e.touches) {
-    var ev = e;
-    e = e.touches[0];
-  }
-  var s = this.down;
-  var x = e.pageX;
+  if (!this.down || this.updown) return;
+  var touches = e.changedTouches;
+  if (!touches) return;
+  // ignore more than one finger
+  if (e.touches.length > 1) return;
+  touches = touches[0];
+
+  var down = this.down;
+  var x = touches.pageX;
   var w = this.childWidth;
   var i = this.currentVisible;
-  this.dx = x - s.x;
+  this.dx = x - down.x;
 
   // determine dy and the slope
-  if (!this.lock) {
-    this.lock = true;
-    var y = e.pageY;
-    var dy = y - s.y;
+  if (null == this.updown) {
+    var y = touches.pageY;
+    var dy = y - down.y;
     var slope = dy / this.dx;
 
     // if is greater than 1 or -1, we're swiping up/down
     if (slope > 1 || slope < -1) {
-      this.ignore = true;
+      this.updown = true;
       return;
+    } else {
+      this.updown = false;
     }
   }
 
-  // when we overwrite touch event with e.touches[0], it doesn't
-  // have the preventDefault method. e.preventDefault() prevents
-  // multiaxis scrolling when moving from left to right
-  (ev || e).preventDefault();
+  e.preventDefault();
 
   var dir = this.dx < 0 ? 1 : 0;
   if (this.isFirst() && 0 == dir) this.dx /= 2;
@@ -218,15 +217,15 @@ Swipe.prototype.ontouchmove = function(e){
  */
 
 Swipe.prototype.ontouchend = function(e){
-  if (!this.down) return;
   e.stopPropagation();
-
-  // touches
-  if (e.changedTouches) e = e.changedTouches[0];
+  if (!this.down) return;
+  var touches = e.changedTouches;
+  if (!touches) return;
+  touches = touches[0];
 
   // setup
   var dx = this.dx;
-  var x = e.pageX;
+  var x = touches.pageX;
   var w = this.childWidth;
 
   // < 200ms swipe
