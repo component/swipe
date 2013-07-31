@@ -1,4 +1,9 @@
 
+1.7.1 / 2013-07-31
+==================
+
+ * fixed jumpiness when scrolling and quickly stopping scroll
+
 1.7.0 / 2013-07-11
 ==================
 
