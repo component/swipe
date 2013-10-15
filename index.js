@@ -316,12 +316,7 @@ Swipe.prototype.stop = function(){
  */
 
 Swipe.prototype.cycle = function(){
-  if (this.isLast()) {
-    this.currentVisible = -1;
-    this.next();
-  } else {
-    this.next();
-  }
+  return this.next(true);
 };
 
 /**
@@ -353,7 +348,10 @@ Swipe.prototype.isLast = function(){
  * @api public
  */
 
-Swipe.prototype.prev = function(){
+Swipe.prototype.prev = function(cycle){
+  if (cycle && this.isFirst()) {
+    this.currentVisible = this.visible;
+  }
   this.show(this.currentVisible - 1);
   return this;
 };
@@ -365,7 +363,10 @@ Swipe.prototype.prev = function(){
  * @api public
  */
 
-Swipe.prototype.next = function(){
+Swipe.prototype.next = function(cycle){
+  if (cycle && this.isLast()) {
+    this.currentVisible = -1;
+  }
   this.show(this.currentVisible + 1);
   return this;
 };

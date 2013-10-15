@@ -70,13 +70,17 @@
 
   Is on the last visisble item.
 
-### .prev()
+### .prev(cycle)
 
-  Show the previous item if present, or do nothing.
+  Show the previous item.
+  By default, do nothing if showing the first item.
+  If `cycle` is true and we are on the first item, display the last item.
 
-### .next()
+### .next(cycle)
 
-  Show the next item if present, or do nothing.
+  Show the next item.
+  By default, do nothing if showing the last item.
+  If `cycle` is true and we are on the last item, display the first item.
 
 ### .show(i, [ms], [options])
 
