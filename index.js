@@ -38,7 +38,7 @@ function Swipe(el) {
   this.interval(5000);
   this.duration(300);
   this.fastThreshold(200);
-  this.threshold(.5);
+  this.threshold(0.5);
   this.show(0, 0, { silent: true });
   this.bind();
 }
@@ -159,7 +159,7 @@ Swipe.prototype.ontouchstart = function(e){
   this.down = {
     x: touches.pageX,
     y: touches.pageY,
-    at: new Date
+    at: new Date()
   };
 };
 
@@ -229,7 +229,7 @@ Swipe.prototype.ontouchend = function(e){
   var w = this.childWidth;
 
   // < 200ms swipe
-  var ms = new Date - this.down.at;
+  var ms = new Date() - this.down.at;
   var threshold = ms < this._fastThreshold ? w / 10 : w * this._threshold;
   var dir = dx < 0 ? 1 : 0;
   var half = Math.abs(dx) >= threshold;
