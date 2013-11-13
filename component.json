@@ -2,7 +2,7 @@
   "name": "swipe",
   "repo": "component/swipe",
   "description": "Swipe component with touch support",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "keywords": [
     "carousel",
     "slide",

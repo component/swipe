@@ -1,4 +1,9 @@
 
+1.7.3 / 2013-11-13
+==================
+
+ * package: use GitHub tarball URL for indexof component
+
 1.7.2 / 2013-11-13
 ==================
 
