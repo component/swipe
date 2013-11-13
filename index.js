@@ -10,6 +10,7 @@ var style = require('computed-style');
 var Emitter = require('emitter');
 var event = require('event');
 var events = require('events');
+var indexOf = require('indexof');
 var min = Math.min;
 var max = Math.max;
 
@@ -38,7 +39,7 @@ function Swipe(el) {
   this.interval(5000);
   this.duration(300);
   this.fastThreshold(200);
-  this.threshold(.5);
+  this.threshold(0.5);
   this.show(0, 0, { silent: true });
   this.bind();
 }
@@ -159,7 +160,7 @@ Swipe.prototype.ontouchstart = function(e){
   this.down = {
     x: touches.pageX,
     y: touches.pageY,
-    at: new Date
+    at: new Date()
   };
 };
 
@@ -229,7 +230,7 @@ Swipe.prototype.ontouchend = function(e){
   var w = this.childWidth;
 
   // < 200ms swipe
-  var ms = new Date - this.down.at;
+  var ms = new Date() - this.down.at;
   var threshold = ms < this._fastThreshold ? w / 10 : w * this._threshold;
   var dir = dx < 0 ? 1 : 0;
   var half = Math.abs(dx) >= threshold;
@@ -463,22 +464,6 @@ Swipe.prototype.translate = function(x){
     s[transform] = 'translateX(' + x + 'px)';
   }
 };
-
-/**
- * Return index of `el` in `els`.
- *
- * @param {Array} els
- * @param {Element} el
- * @return {Number}
- * @api private
- */
-
-function indexOf(els, el) {
-  for (var i = 0; i < els.length; i++) {
-    if (els[i] == el) return i;
-  }
-  return -1;
-}
 
 /**
  * Check if `el` is visible.
