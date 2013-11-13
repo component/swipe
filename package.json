@@ -18,6 +18,7 @@
     "has-translate3d": "0.0.2",
     "transform-property": "0.0.1",
     "computed-style-component": "0.1.0",
+    "touchaction-property": "0.0.1",
     "transitionend-property": "0.0.2"
   },
   "development": {},

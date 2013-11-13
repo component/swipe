@@ -5,6 +5,7 @@
 
 var transitionend = require('transitionend-property');
 var transform = require('transform-property');
+var touchAction = require('touchaction-property');
 var has3d = require('has-translate3d');
 var style = require('computed-style');
 var Emitter = require('emitter');
@@ -31,6 +32,7 @@ function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
   this.child = el.children[0];
+  this.touchAction('none');
   this.currentEl = this.children().visible[0];
   this.currentVisible = 0;
   this.current = 0;
@@ -121,14 +123,22 @@ Swipe.prototype.refresh = function(){
 
 Swipe.prototype.bind = function(){
   this.events = events(this.child, this);
+  this.docEvents = events(document, this);
+
+  // standard mouse click events
   this.events.bind('mousedown', 'ontouchstart');
   this.events.bind('mousemove', 'ontouchmove');
+  this.docEvents.bind('mouseup', 'ontouchend');
+
+  // W3C touch events
   this.events.bind('touchstart');
   this.events.bind('touchmove');
-
-  this.docEvents = events(document, this);
-  this.docEvents.bind('mouseup', 'ontouchend');
   this.docEvents.bind('touchend');
+
+  // MS IE touch events
+  this.events.bind('PointerDown', 'ontouchstart');
+  this.events.bind('PointerMove', 'ontouchmove');
+  this.docEvents.bind('PointerUp', 'ontouchstart');
 };
 
 /**
@@ -149,17 +159,14 @@ Swipe.prototype.unbind = function(){
  */
 
 Swipe.prototype.ontouchstart = function(e){
-  var touches = e.changedTouches;
-  if (!touches) return;
-  touches = touches[0];
-
   this.transitionDuration(0);
   this.dx = 0;
   this.updown = null;
 
+  var touch = this.getTouch(e);
   this.down = {
-    x: touches.pageX,
-    y: touches.pageY,
+    x: touch.pageX,
+    y: touch.pageY,
     at: new Date()
   };
 };
@@ -176,21 +183,20 @@ Swipe.prototype.ontouchstart = function(e){
 
 Swipe.prototype.ontouchmove = function(e){
   if (!this.down || this.updown) return;
-  var touches = e.changedTouches;
-  if (!touches) return;
-  // ignore more than one finger
-  if (e.touches.length > 1) return;
-  touches = touches[0];
+  var touch = this.getTouch(e);
+
+  // TODO: ignore more than one finger
+  if (!touch) return;
 
   var down = this.down;
-  var x = touches.pageX;
+  var x = touch.pageX;
   var w = this.childWidth;
   var i = this.currentVisible;
   this.dx = x - down.x;
 
   // determine dy and the slope
   if (null == this.updown) {
-    var y = touches.pageY;
+    var y = touch.pageY;
     var dy = y - down.y;
     var slope = dy / this.dx;
 
@@ -220,13 +226,11 @@ Swipe.prototype.ontouchmove = function(e){
 Swipe.prototype.ontouchend = function(e){
   e.stopPropagation();
   if (!this.down) return;
-  var touches = e.changedTouches;
-  if (!touches) return;
-  touches = touches[0];
+  var touch = this.getTouch(e);
 
   // setup
   var dx = this.dx;
-  var x = touches.pageX;
+  var x = touch.pageX;
   var w = this.childWidth;
 
   // < 200ms swipe
@@ -463,6 +467,36 @@ Swipe.prototype.translate = function(x){
   } else {
     s[transform] = 'translateX(' + x + 'px)';
   }
+};
+
+/**
+ * Sets the "touchAction" CSS style property to `value`.
+ *
+ * @api private
+ */
+
+Swipe.prototype.touchAction = function(value){
+  var s = this.child.style;
+  if (touchAction) {
+    s[touchAction] = value;
+  }
+};
+
+/**
+ * Gets the appropriate "touch" object for the `e` event. The event may be from
+ * a "mouse", "touch", or "Pointer" event, so the normalization happens here.
+ *
+ * @api private
+ */
+
+Swipe.prototype.getTouch = function(e){
+  // "mouse" and "Pointer" events just use the event object itself
+  var touch = e;
+  if (e.changedTouches && e.changedTouches.length > 0) {
+    // W3C "touch" events use the `changedTouches` array
+    touch = e.changedTouches[0];
+  }
+  return touch;
 };
 
 /**
