@@ -5,6 +5,7 @@
 
 var transitionend = require('transitionend-property');
 var transform = require('transform-property');
+var touchAction = require('touchaction-property');
 var has3d = require('has-translate3d');
 var style = require('computed-style');
 var Emitter = require('emitter');
@@ -31,6 +32,7 @@ function Swipe(el) {
   if (!(this instanceof Swipe)) return new Swipe(el);
   if (!el) throw new TypeError('Swipe() requires an element');
   this.child = el.children[0];
+  this.touchAction('none');
   this.currentEl = this.children().visible[0];
   this.currentVisible = 0;
   this.current = 0;
@@ -462,6 +464,19 @@ Swipe.prototype.translate = function(x){
     s[transform] = 'translate3d(' + x + 'px, 0, 0)';
   } else {
     s[transform] = 'translateX(' + x + 'px)';
+  }
+};
+
+/**
+ * Sets the "touchAction" CSS style property to `value`.
+ *
+ * @api private
+ */
+
+Swipe.prototype.touchAction = function(value){
+  var s = this.child.style;
+  if (touchAction) {
+    s[touchAction] = value;
   }
 };
 
