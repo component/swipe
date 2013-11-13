@@ -1,4 +1,10 @@
 
+1.7.2 / 2013-11-13
+==================
+
+ * Add touch support for IE (@tootallnate)
+ * use component/indexof (@tootallnate)
+
 1.7.1 / 2013-07-31
 ==================
 
