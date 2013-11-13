@@ -10,6 +10,7 @@ var style = require('computed-style');
 var Emitter = require('emitter');
 var event = require('event');
 var events = require('events');
+var indexOf = require('indexof');
 var min = Math.min;
 var max = Math.max;
 
@@ -463,22 +464,6 @@ Swipe.prototype.translate = function(x){
     s[transform] = 'translateX(' + x + 'px)';
   }
 };
-
-/**
- * Return index of `el` in `els`.
- *
- * @param {Array} els
- * @param {Element} el
- * @return {Number}
- * @api private
- */
-
-function indexOf(els, el) {
-  for (var i = 0; i < els.length; i++) {
-    if (els[i] == el) return i;
-  }
-  return -1;
-}
 
 /**
  * Check if `el` is visible.
