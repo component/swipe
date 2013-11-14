@@ -12,7 +12,7 @@
     "ui"
   ],
   "dependencies": {
-    "indexof-component": "https://github.com/component/indexof/archive/0.0.2.tar.gz",
+    "indexof-component": "component/indexof#0.0.2",
     "emitter-component": "1.0.0",
     "event-component": "0.1.0",
     "events-component-2": "1.0.2",
