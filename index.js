@@ -107,8 +107,12 @@ Swipe.prototype.refresh = function(){
   }
 
   this.visible = visible;
-  this.childWidth = this.el.getBoundingClientRect().width;
-  this.width = Math.ceil(this.childWidth * visible);
+  this.childWidth = [0];
+  this.width = 0;
+  for(var i = 0, size = this.children().all.length; i < size; i++) {
+    this.width += this.children().all[i].clientWidth;
+    this.childWidth.push(this.width);
+  }
   this.child.style.width = this.width + 'px';
   this.child.style.height = this.height + 'px';
   this.show(this.currentVisible, 0, { silent: true });
@@ -394,7 +398,7 @@ Swipe.prototype.show = function(i, ms, options){
   this.currentEl = children.visible[i];
   this.current = indexOf(children.all, this.currentEl);
   this.transitionDuration(ms);
-  this.translate(this.childWidth * i);
+  this.translate(this.childWidth[i]);
 
   if (!options.silent) {
     this.emit('showing', this.current, this.currentEl);
