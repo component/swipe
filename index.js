@@ -7,10 +7,10 @@ var transitionend = require('transitionend-property');
 var transform = require('transform-property');
 var touchAction = require('touchaction-property');
 var has3d = require('has-translate3d');
-var style = require('computed-style');
-var Emitter = require('emitter');
-var event = require('event');
-var events = require('events');
+var style = require('computed-style-component');
+var Emitter = require('emitter-component');
+var event = require('event-component');
+var events = require('events-component-2');
 var min = Math.min;
 var max = Math.max;
 
