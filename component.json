@@ -12,7 +12,7 @@
     "ui"
   ],
   "dependencies": {
-    "component/emitter": "1.1.3",
+    "component/emitter": "1.2.0",
     "component/event": "0.1.4",
     "component/events": "1.0.9",
     "component/has-translate3d": "0.0.3",
