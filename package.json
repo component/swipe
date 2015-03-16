@@ -20,7 +20,6 @@
     "touchaction-property": "0.0.1",
     "transitionend-property": "0.0.2"
   },
-  "development": {},
   "license": "MIT",
   "component": {
     "scripts": {
