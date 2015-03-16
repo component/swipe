@@ -1,4 +1,12 @@
 
+1.7.6 / 2015-03-16
+==================
+
+  * package: update all deps and fix browserify build
+  * package: remove "development" field
+  * package: remove "repo" field
+  * component: update "emitter" to v1.2.0
+
 1.7.5 / 2014-09-27
 ==================
 
