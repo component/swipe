@@ -7,18 +7,18 @@
 1.7.3 / 2013-11-13
 ==================
 
- * package: use GitHub tarball URL for indexof component
+  * package: use GitHub tarball URL for indexof component
 
 1.7.2 / 2013-11-13
 ==================
 
- * Add touch support for IE (@tootallnate)
- * use component/indexof (@tootallnate)
+  * Add touch support for IE (@tootallnate)
+  * use component/indexof (@tootallnate)
 
 1.7.1 / 2013-07-31
 ==================
 
- * fixed jumpiness when scrolling and quickly stopping scroll
+  * fixed jumpiness when scrolling and quickly stopping scroll
 
 1.7.0 / 2013-07-11
 ==================
@@ -28,8 +28,8 @@
 1.6.0 / 2013-06-19
 ==================
 
- * add Swipe#fastThreshold(ms)
- * add Swipe#threshold(n)
+  * add Swipe#fastThreshold(ms)
+  * add Swipe#threshold(n)
 
 1.5.4 / 2013-06-01
 ==================
@@ -44,15 +44,15 @@
 1.5.2 / 2013-05-31
 ==================
 
- * fix show on .refresh() regression
- * fix support for hidden slides
- * fix .isFirst(), should be visible only
- * change currentIndex -> currentVisibleIndex
+  * fix show on .refresh() regression
+  * fix support for hidden slides
+  * fix .isFirst(), should be visible only
+  * change currentIndex -> currentVisibleIndex
 
 1.5.1 / 2013-05-29
 ==================
 
- * fix .current relative to all elements and a few other subtle bugs
+  * fix .current relative to all elements and a few other subtle bugs
 
 1.5.0 / 2013-05-28
 ==================
@@ -62,7 +62,7 @@
 1.4.2 / 2013-05-27
 ==================
 
- * pin deps
+  * pin deps
 
 1.4.1 / 2013-05-03
 ==================
