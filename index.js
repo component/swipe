@@ -10,7 +10,7 @@ var has3d = require('has-translate3d');
 var style = require('computed-style');
 var Emitter = require('emitter');
 var event = require('event');
-var events = require('events');
+var events = require('component-events');
 var min = Math.min;
 var max = Math.max;
 

@@ -23,8 +23,7 @@
   "browser": {
     "computed-style": "computed-style-component",
     "emitter": "component-emitter",
-    "event": "component-event",
-    "events": "component-events"
+    "event": "component-event"
   },
   "license": "MIT",
   "component": {
