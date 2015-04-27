@@ -287,6 +287,20 @@ Swipe.prototype.interval = function(ms){
 };
 
 /**
+ * Sets `loop` state
+ *
+ * @param {Boolean} loop - if true it'll cause next and prev to rewind
+ * @return {Swipe} self
+ * @api public
+ */
+
+Swipe.prototype.loop = function(loop){
+  this._loop = loop;
+  return this;
+};
+
+
+/**
  * Play through all the elements.
  *
  * @return {Swipe} self
@@ -320,12 +334,9 @@ Swipe.prototype.stop = function(){
  */
 
 Swipe.prototype.cycle = function(){
-  if (this.isLast()) {
-    this.currentVisible = -1;
-    this.next();
-  } else {
-    this.next();
-  }
+  this.show(this.currentVisible + 1, null, {
+    loop: true
+  });
 };
 
 /**
@@ -358,7 +369,9 @@ Swipe.prototype.isLast = function(){
  */
 
 Swipe.prototype.prev = function(){
-  this.show(this.currentVisible - 1);
+  this.show(this.currentVisible - 1, null, {
+    loop: this._loop
+  });
   return this;
 };
 
@@ -370,7 +383,9 @@ Swipe.prototype.prev = function(){
  */
 
 Swipe.prototype.next = function(){
-  this.show(this.currentVisible + 1);
+  this.show(this.currentVisible + 1, null, {
+    loop: this._loop
+  });
   return this;
 };
 
@@ -389,7 +404,14 @@ Swipe.prototype.show = function(i, ms, options){
   if (null == ms) ms = this._duration;
   var self = this;
   var children = this.children();
-  i = max(0, min(i, children.visible.length - 1));
+  if (!options.loop) {
+    i = max(0, min(i, children.visible.length - 1));
+  } else {
+    i = i % children.visible.length;
+    if (i < 0) {
+      i+= children.visible.length;
+    }
+  }
   this.currentVisible = i;
   this.currentEl = children.visible[i];
   this.current = indexOf(children.all, this.currentEl);

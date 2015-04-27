@@ -49,6 +49,11 @@
 
   Set the cycle interval, defaults to 5000ms.
 
+### .loop(state)
+
+  Affects the way next/prev are working.
+  If set to true they rewind after reaching beyond the last (or the first parameter).
+
 ### .refresh()
 
   This method should be invoked when the swipe element
@@ -72,11 +77,15 @@
 
 ### .prev()
 
-  Show the previous item if present, or do nothing.
+  Show the previous item.
+  By default, do nothing if showing the first item.
+  If `loop` is set to true and we are on the first item, display the last item.
 
 ### .next()
 
-  Show the next item if present, or do nothing.
+  Show the next item.
+  By default, do nothing if showing the last item.
+  If `loop` is set to true and we are on the last item, display the first item.
 
 ### .show(i, [ms], [options])
 
@@ -84,6 +93,7 @@
   transition in `ms` defaulting to the `.duration()` value.
 
   You may pass `{ silent: true }` as an option to silence show events.
+  You may pass `{ loop: true }` to treat the position modulo the number of items.
 
 ## License
 
